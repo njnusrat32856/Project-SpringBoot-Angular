@@ -6,20 +6,33 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoanListComponent } from './components/loan-list/loan-list.component';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
+import { DepositComponent } from './components/deposit/deposit.component';
+import { TransferComponent } from './components/transfer/transfer.component';
+import { WithdrawComponent } from './components/withdraw/withdraw.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    LoanListComponent
+    LoanListComponent,
+    TransactionListComponent,
+    DepositComponent,
+    TransferComponent,
+    WithdrawComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })

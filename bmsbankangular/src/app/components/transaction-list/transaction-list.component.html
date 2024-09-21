@@ -1,0 +1,40 @@
+<div class="transaction-list">
+    <h2>Transaction List</h2>
+    
+    <!-- Display an error message if something goes wrong -->
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  
+    <!-- Display the transaction data in a table if transactions exist -->
+    <table *ngIf="transactions.length > 0" border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Transaction Date</th>
+          <th>Amount</th>
+          <th>Transaction Type</th>
+          <th>Description</th>
+          <th>Target <br> Account <br> Number</th>
+          <th>Status</th>
+          <!-- <th>Actions</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaction of transactions">
+          <td>{{ transaction.id }}</td>
+          <td>{{ transaction.transactionDate | date: 'medium' }}</td>
+          <td>{{ transaction.amount | currency }}</td>
+          <td>{{ transaction.transactionType }}</td>
+          <td>{{ transaction.description }}</td>
+          <td>{{ transaction.targetAccountNumber }}</td>
+          <td>{{ transaction.status ? 'Completed' : 'Pending' }}</td>
+          <!-- <td>
+            <button (click)="deleteTransaction(transaction.id)">Delete</button>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Display a message when no transactions are available -->
+    <p *ngIf="transactions.length === 0">No transactions available.</p>
+  </div>
+  

@@ -18,7 +18,7 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-//    private String loanType;
+    private String loanType;
 
     private double loanAmount;
 

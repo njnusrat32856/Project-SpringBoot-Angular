@@ -16,5 +16,6 @@ export class User {
     accountType !: string;
     createDate !: Date;
     status !: boolean;
+    balance !: number;
 
 }

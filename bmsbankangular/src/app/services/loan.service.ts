@@ -14,16 +14,29 @@ export class LoanService {
     private http: HttpClient
   ) { }
 
+  // Fetch all loans
   getLoans(): Observable<Loan[]> {
     return this.http.get<Loan[]>(this.baseUrl);
   }
 
-  saveLoan(loan: Loan): Observable<Loan> {
-    return this.http.post<Loan>(this.baseUrl + "save",loan);
+  // Fetch a specific loan by its ID
+  getLoanById(id: number): Observable<Loan> {
+    return this.http.get<Loan>(`${this.baseUrl}/${id}`);
   }
 
+  // Fetch loans by user ID
+  getLoansByUserId(userId: number): Observable<Loan[]> {
+    return this.http.get<Loan[]>(`${this.baseUrl}/user/${userId}`);
+  }
+
+  // Create a new loan or update an existing one
+  saveLoan(loan: Loan): Observable<Loan> {
+    return this.http.post<Loan>(this.baseUrl, loan);
+  }
+
+  // Delete a loan by its ID
   deleteLoan(id: number): Observable<void> {
-    return this.http.delete<void>(this.baseUrl +"/" + id);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
   

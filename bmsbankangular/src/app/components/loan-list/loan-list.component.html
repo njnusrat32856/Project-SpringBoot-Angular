@@ -1,1 +1,44 @@
-<p>loan-list works!</p>
+<div class="loan-list">
+    <h2 style="text-align: center;">Loan List</h2>
+    
+    <!-- Display an error message if something goes wrong -->
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  
+    <!-- Display the loan data in a table if loans exist -->
+    <table *ngIf="loans.length > 0" border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Loan <br> Type</th>
+          <th>Amount</th>
+          <th>Interest <br> Rate</th>
+          <th>Monthly <br> Payment</th>
+          <th>Duration <br> (Months)</th>
+          <th>Start <br> Date</th>
+          <th>End <br> Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let loan of loans">
+          <td>{{ loan.id }}</td>
+          <td>{{ loan.loanType }}</td>
+          <td>{{ loan.loanAmount | currency }}</td>
+          <td>{{ loan.interestRate }}%</td>
+          <td>{{ loan.monthlyPayment | currency }}</td>
+          <td>{{ loan.durationInMonths }}</td>
+          <td>{{ loan.startDate }}</td>
+          <td>{{ loan.endDate }}</td>
+          <td>{{ loan.status ? 'Active' : 'Inactive' }}</td>
+          <td>
+            <button (click)="deleteLoan(loan.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Display a message when no loans are available -->
+    <p *ngIf="loans.length === 0">No loans available.</p>
+  </div>
+  

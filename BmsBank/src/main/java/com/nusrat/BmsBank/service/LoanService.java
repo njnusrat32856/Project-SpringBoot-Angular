@@ -30,6 +30,9 @@ public class LoanService {
 
     //save loan
     public void saveLoan(Loan loan) {
+
+        double monthlyPay=(loan.getLoanAmount()*loan.getInterestRate()/100)/loan.getDurationInMonths();
+        loan.setMonthlyPayment(monthlyPay);
         loanRepository.save(loan);
     }
 

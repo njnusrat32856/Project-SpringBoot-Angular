@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.sql.Date;
 
@@ -18,14 +19,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(unique = true)
     private String accountNumber;
 
     private String firstName;
 
     private String lastName;
 
+    @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
     private String gender;
@@ -45,4 +49,9 @@ public class User {
     private Date createDate;
 
     private boolean status;
+
+    private double balance;
+
+
+
 }

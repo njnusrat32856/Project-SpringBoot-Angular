@@ -21,13 +21,14 @@ public class Transaction {
     private LocalDateTime transactionDate;
 
     private double amount;
+    private double balance;
 
     @Enumerated(EnumType.STRING)
     private TransactionType transactionType; //deposit,withdraw,fundTransfer
 
     private String description;
 
-    private long targetAccountNumber;
+    private String targetAccountNumber;
 
     private boolean status;
 

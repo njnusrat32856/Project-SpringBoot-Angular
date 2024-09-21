@@ -29,4 +29,12 @@ public class LoanController {
         loanService.deleteByIdLoan(id);
     }
 
+    @GetMapping("/{id}")
+    public Loan getLoanById(long id) {
+        return loanService.getById(id);
+    }
+
+    public List<Loan> getLoanByUserId(long userId) {
+        return loanService.getLoanByUserId(userId);
+    }
 }

@@ -1,5 +1,6 @@
 package com.nusrat.BmsBank.controller;
 
+import com.nusrat.BmsBank.entity.LoginRequest;
 import com.nusrat.BmsBank.entity.User;
 import com.nusrat.BmsBank.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,24 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<User> addUser(@RequestBody User user) {
-        User savedUser = userService.addUser(user);
-        return ResponseEntity.ok(savedUser);
+//    @PostMapping("/add")
+//    public ResponseEntity<User> addUser(@RequestBody User user) {
+//        User savedUser = userService.addUser(user);
+//        return ResponseEntity.ok(savedUser);
+//    }
+
+    // Register endpoint
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        User registeredUser = userService.registerUser(user);
+        return ResponseEntity.ok(registeredUser);
+    }
+
+    // Login endpoint
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody LoginRequest loginRequest) {
+        User user = userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword());
+        return ResponseEntity.ok(user);
     }
 
     @PutMapping("/update")

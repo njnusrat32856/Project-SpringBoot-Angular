@@ -12,6 +12,9 @@ import { TransactionListComponent } from './components/transaction-list/transact
 import { DepositComponent } from './components/deposit/deposit.component';
 import { TransferComponent } from './components/transfer/transfer.component';
 import { WithdrawComponent } from './components/withdraw/withdraw.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { LoginComponent } from './reg-login/login/login.component';
+import { RegisterComponent } from './reg-login/register/register.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { WithdrawComponent } from './components/withdraw/withdraw.component';
     TransactionListComponent,
     DepositComponent,
     TransferComponent,
-    WithdrawComponent
+    WithdrawComponent,
+    UserProfileComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

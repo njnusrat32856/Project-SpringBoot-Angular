@@ -5,6 +5,9 @@ import { TransactionListComponent } from './components/transaction-list/transact
 import { DepositComponent } from './components/deposit/deposit.component';
 import { TransferComponent } from './components/transfer/transfer.component';
 import { WithdrawComponent } from './components/withdraw/withdraw.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { RegisterComponent } from './reg-login/register/register.component';
+import { LoginComponent } from './reg-login/login/login.component';
 
 const routes: Routes = [
   {
@@ -19,7 +22,15 @@ const routes: Routes = [
   },
   {
     path: 'withdraw', component: WithdrawComponent
+  },
+  { path: 'user-profile', component: UserProfileComponent },
+  {
+    path: 'register', component: RegisterComponent
+  },
+  {
+    path: 'login', component: LoginComponent
   }
+
 ];
 
 @NgModule({

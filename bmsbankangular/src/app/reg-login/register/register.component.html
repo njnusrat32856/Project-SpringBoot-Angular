@@ -1,0 +1,73 @@
+<div class="register-form">
+    <h2>Register</h2>
+  
+    <!-- Error message -->
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  
+    <form (ngSubmit)="register()">
+      
+  
+      <div>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" [(ngModel)]="user.firstName" name="firstName" required />
+      </div>
+  
+      <div>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" [(ngModel)]="user.lastName" name="lastName" required />
+      </div>
+  
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="user.email" name="email" required />
+      </div>
+  
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" [(ngModel)]="user.password" name="password" required />
+      </div>
+  
+      <div>
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" [(ngModel)]="user.gender" name="gender" />
+      </div>
+  
+      <div>
+        <label for="address">Address:</label>
+        <input type="text" id="address" [(ngModel)]="user.address" name="address" />
+      </div>
+  
+      <div>
+        <label for="mobileNo">Mobile No:</label>
+        <input type="text" id="mobileNo" [(ngModel)]="user.mobileNo" name="mobileNo" required />
+      </div>
+  
+      <div>
+        <label for="nid">NID:</label>
+        <input type="text" id="nid" [(ngModel)]="user.nid" name="nid" required />
+      </div>
+  
+      <div>
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" [(ngModel)]="user.dob" name="dob" required />
+      </div>
+  
+      <div>
+        <label for="accountType">Account Type:</label>
+        <input type="text" id="accountType" [(ngModel)]="user.accountType" name="accountType" required />
+      </div>
+  
+      <div>
+        <label for="balance">Initial Balance:</label>
+        <input type="number" id="balance" [(ngModel)]="user.balance" name="balance" min="0" />
+      </div>
+  
+      <div>
+        <label for="image">Profile Image:</label>
+        <input type="file" id="image" (change)="onImageSelected($event)" />
+      </div>
+  
+      <button type="submit">Register</button>
+    </form>
+  </div>
+  

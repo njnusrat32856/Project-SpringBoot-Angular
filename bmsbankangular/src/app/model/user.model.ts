@@ -14,7 +14,7 @@ export class User {
     dob !: string;
     image !: string;
     accountType !: string;
-    createDate !: Date;
+    createDate !: string;
     status !: boolean;
     balance !: number;
 

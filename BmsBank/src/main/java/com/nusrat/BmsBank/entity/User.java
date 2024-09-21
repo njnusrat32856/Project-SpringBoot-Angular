@@ -42,6 +42,7 @@ public class User {
 
     private String dob;
 
+    @Column(columnDefinition = "LONGTEXT")
     private String image;
 
     private String accountType;

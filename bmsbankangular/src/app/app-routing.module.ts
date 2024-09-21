@@ -8,6 +8,7 @@ import { WithdrawComponent } from './components/withdraw/withdraw.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { RegisterComponent } from './reg-login/register/register.component';
 import { LoginComponent } from './reg-login/login/login.component';
+import { LogoutComponent } from './reg-login/logout/logout.component';
 
 const routes: Routes = [
   {
@@ -29,8 +30,13 @@ const routes: Routes = [
   },
   {
     path: 'login', component: LoginComponent
+  },
+  {
+    path: '', redirectTo: 'login', pathMatch: 'full'
+  },
+  {
+    path: 'logout', component: LogoutComponent
   }
-
 ];
 
 @NgModule({

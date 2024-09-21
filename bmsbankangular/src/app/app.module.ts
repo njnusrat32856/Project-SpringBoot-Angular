@@ -15,6 +15,7 @@ import { WithdrawComponent } from './components/withdraw/withdraw.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { LoginComponent } from './reg-login/login/login.component';
 import { RegisterComponent } from './reg-login/register/register.component';
+import { LogoutComponent } from './reg-login/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { RegisterComponent } from './reg-login/register/register.component';
     WithdrawComponent,
     UserProfileComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

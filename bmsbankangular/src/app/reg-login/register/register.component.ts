@@ -59,6 +59,7 @@ export class RegisterComponent {
   private registerUser(): void {
     this.userService.register(this.user).subscribe({
       next:() => {
+        this.userService.currentUser;
         this.router.navigate(['/user-profile']); // Redirect to user profile
       },
       error:(error) => {

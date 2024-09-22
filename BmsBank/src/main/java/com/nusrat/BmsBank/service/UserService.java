@@ -3,7 +3,10 @@ package com.nusrat.BmsBank.service;
 import com.nusrat.BmsBank.entity.User;
 import com.nusrat.BmsBank.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -12,13 +15,21 @@ import java.util.Random;
 import java.util.UUID;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByEmail(username)
+                .orElseThrow(
+                        () -> new UsernameNotFoundException("User not found with this Email Address: " + username)
+                );
+    }
 
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -29,24 +40,24 @@ public class UserService {
     }
 
     // Register a new user
-    public User registerUser(User user) {
-        // Check if email already exists
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already in use");
-        }
-
-        // Encrypt the password before saving
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        // Set createDate to the current date if not provided
-        if (user.getCreateDate() == null) {
-            user.setCreateDate(new Date(System.currentTimeMillis()));
-        }
-
-        user.setAccountNumber(generateRandomNineDigitNumber());
-        // Save the user
-        return userRepository.save(user);
-    }
+//    public User registerUser(User user) {
+//        // Check if email already exists
+//        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+//            throw new RuntimeException("Email already in use");
+//        }
+//
+//        // Encrypt the password before saving
+////        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//
+//        // Set createDate to the current date if not provided
+//        if (user.getCreateDate() == null) {
+//            user.setCreateDate(new Date(System.currentTimeMillis()));
+//        }
+//
+//        user.setAccountNumber(generateRandomNineDigitNumber());
+//        // Save the user
+//        return userRepository.save(user);
+//    }
 //    public User addUser(User user) {
 //
 //
@@ -83,5 +94,14 @@ public class UserService {
         int number = 100000000 + random.nextInt(900000000);
         return String.valueOf(number);
     }
+    public String generateUniqueAccountNumber() {
+        String accountNumber;
+        do {
+            accountNumber = generateRandomNineDigitNumber();
+        } while (userRepository.findByAccountNumber(accountNumber).isPresent());
+
+        return accountNumber;
+    }
+
 
 }

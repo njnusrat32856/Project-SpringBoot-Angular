@@ -60,7 +60,7 @@ export class RegisterComponent {
     this.userService.register(this.user).subscribe({
       next:() => {
         this.userService.currentUser;
-        this.router.navigate(['/user-profile']); // Redirect to user profile
+        this.router.navigate(['/login']); // Redirect to user profile
       },
       error:(error) => {
         this.errorMessage = 'Registration failed';

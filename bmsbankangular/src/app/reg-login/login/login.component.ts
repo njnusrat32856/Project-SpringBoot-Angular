@@ -18,6 +18,7 @@ export class LoginComponent {
   login(): void {
     this.userService.login(this.email, this.password).subscribe({
       next: () => {
+        this.userService.currentUser;
         this.router.navigate(['/user-profile']); // Redirect to user profile
       },
       error: (error) => {

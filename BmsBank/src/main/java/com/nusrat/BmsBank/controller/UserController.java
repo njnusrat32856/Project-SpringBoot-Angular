@@ -33,11 +33,11 @@ public class UserController {
 //    }
 
     // Register endpoint
-    @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
-        User registeredUser = userService.registerUser(user);
-        return ResponseEntity.ok(registeredUser);
-    }
+//    @PostMapping("/register")
+//    public ResponseEntity<User> registerUser(@RequestBody User user) {
+//        User registeredUser = userService.registerUser(user);
+//        return ResponseEntity.ok(registeredUser);
+//    }
 
     // Login endpoint
     @PostMapping("/login")

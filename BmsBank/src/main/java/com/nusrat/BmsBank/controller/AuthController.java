@@ -25,6 +25,7 @@ public class AuthController {
         return ResponseEntity.ok(authService.authenticate(request));
     }
 
+    // this for email
 //    public ResponseEntity<String> activateUser(@PathVariable("id") long id) {
 //        String response = authService.
 //    }

@@ -1,6 +1,7 @@
 package com.nusrat.BmsBank.service;
 
 import com.nusrat.BmsBank.entity.AuthResponse;
+import com.nusrat.BmsBank.entity.Role;
 import com.nusrat.BmsBank.entity.Token;
 import com.nusrat.BmsBank.entity.User;
 import com.nusrat.BmsBank.jwt.JwtService;
@@ -49,26 +50,29 @@ public class AuthService {
         });
         tokenRespository.saveAll(validTokens);
     }
-    public AuthResponse register(User request) {
-        if (userRepository.findByEmail(request.getUsername()).isPresent()) {
+    public AuthResponse register(User user) {
+        if (userRepository.findByEmail(user.getUsername()).isPresent()) {
             return new AuthResponse(null, "User already exists");
 
         }
-        User user = new User();
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setEmail(request.getEmail());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
+//        User user = new User();
+//        user.setFirstName(request.getFirstName());
+//        user.setLastName(request.getLastName());
+//        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setAccountNumber(userService.generateUniqueAccountNumber());
-        user.setRole(request.getRole());
-        user.setAddress(request.getAddress());
-        user.setDob(request.getDob());
-        user.setGender(request.getGender());
-        user.setNid(request.getNid());
-        user.setMobileNo(request.getMobileNo());
+        user.setRole(Role.valueOf("USER"));
+        user.setStatus(false);
+//        user.setAddress(request.getAddress());
+//        user.setDob(request.getDob());
+//        user.setGender(request.getGender());
+//        user.setNid(request.getNid());
+//        user.setMobileNo(request.getMobileNo());
+//        user.setAccountType(request.getAccountType());
+//        user.setBalance(request.getBalance());
 
-        String jwt = jwtService.generateToken(request);
-        saveUserToken(jwt, request);
+        String jwt = jwtService.generateToken(user);
+        saveUserToken(jwt, user);
 
         return new AuthResponse(jwt, "User registration was successful");
     }

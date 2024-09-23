@@ -7,6 +7,7 @@ import com.nusrat.BmsBank.entity.User;
 import com.nusrat.BmsBank.jwt.JwtService;
 import com.nusrat.BmsBank.repository.TokenRespository;
 import com.nusrat.BmsBank.repository.UserRepository;
+import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,6 +30,8 @@ public class AuthService {
 
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
+
+    private final EmailService emailService;
 
     private void saveUserToken(String jwt, User user) {
 
@@ -70,9 +73,11 @@ public class AuthService {
 //        user.setMobileNo(request.getMobileNo());
 //        user.setAccountType(request.getAccountType());
 //        user.setBalance(request.getBalance());
+        userRepository.save(user);
 
         String jwt = jwtService.generateToken(user);
         saveUserToken(jwt, user);
+        sendActivationEmail(user);
 
         return new AuthResponse(jwt, "User registration was successful");
     }
@@ -96,4 +101,38 @@ public class AuthService {
         return new AuthResponse(jwt,"User login was successful");
     }
 
+    private void sendActivationEmail(User user) {
+        String activationLink = "http://localhost:8084/activate/" + user.getId();
+
+        String mailText = "<h3>Dear " + user.getFirstName()+ user.getLastName()
+                + ",</h3>"
+                + "<p>Please click on the following link to confirm your account:</p>"
+                + "<a href=\"" + activationLink + "\">Activate Account</a>"
+                + "<br><br>Regards,<br>Hotel Booking";
+
+        String subject = "Confirm User Account";
+
+        try {
+
+            emailService.sendSimpleEmail(user.getEmail(), subject, mailText);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public String activateUser(long id) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not Found with this ID"));
+
+        if (user != null) {
+
+            user.setStatus(true);
+            //  user.setActivationToken(null); // Clear token after activation
+            userRepository.save(user);
+            return "User activated successfully!";
+        } else {
+            return "Invalid activation token!";
+        }
+    }
 }

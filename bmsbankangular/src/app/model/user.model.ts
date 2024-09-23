@@ -1,3 +1,5 @@
+import { Role } from "./role.model";
+import { Token } from "./token.model";
 
 export class User {
 
@@ -17,5 +19,9 @@ export class User {
     createDate !: string;
     status !: boolean;
     balance !: number;
+
+    role!: Role;
+  
+    tokens!: Token[];
 
 }

@@ -67,17 +67,17 @@ public class UserService implements UserDetailsService {
 //    }
 
     // Authenticate user by email and password
-    public User loginUser(String email, String password) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Invalid email or password"));
-
-//        // Check password match
-//        if (!passwordEncoder.matches(password, user.getPassword())) {
-//            throw new RuntimeException("Invalid email or password");
-//        }
-
-        return user;
-    }
+//    public User loginUser(String email, String password) {
+//        User user = userRepository.findByEmail(email)
+//                .orElseThrow(() -> new RuntimeException("Invalid email or password"));
+//
+////        // Check password match
+////        if (!passwordEncoder.matches(password, user.getPassword())) {
+////            throw new RuntimeException("Invalid email or password");
+////        }
+//
+//        return user;
+//    }
 
     public User updateUser(User user) {
         return userRepository.save(user);

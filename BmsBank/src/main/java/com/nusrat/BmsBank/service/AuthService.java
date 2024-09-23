@@ -55,7 +55,7 @@ public class AuthService {
     }
     public AuthResponse register(User user) {
         if (userRepository.findByEmail(user.getUsername()).isPresent()) {
-            return new AuthResponse(null, "User already exists");
+            return new AuthResponse(null, "User already exists", null);
 
         }
 //        User user = new User();
@@ -80,7 +80,7 @@ public class AuthService {
         saveUserToken(jwt, user);
         sendActivationEmail(user);
 
-        return new AuthResponse(jwt, "User registration was successful");
+        return new AuthResponse(jwt, "User registration was successful", null);
     }
     public AuthResponse authenticate(User request) {
 
@@ -99,7 +99,9 @@ public class AuthService {
 
         saveUserToken(jwt, user);
 
-        return new AuthResponse(jwt,"User login was successful");
+        user.setPassword(null);
+        user.setTokens(null);
+        return new AuthResponse(jwt,"User login was successful", user);
     }
 
     private void sendActivationEmail(User user) {

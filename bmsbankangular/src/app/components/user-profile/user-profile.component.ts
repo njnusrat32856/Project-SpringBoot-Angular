@@ -19,17 +19,19 @@ export class UserProfileComponent implements OnInit {
 
   // Load the user profile
   loadUserProfile(): void {
-    this.userService.getCurrentUserProfile().subscribe({
-      next:(response: User) => {
-        console.log("=======================================================");
-        console.log(response);
-        this.user = response;
-      },
-      error:error => {
-        this.errorMessage = 'Unable to load user profile. Please try again.';
-        console.error(error);
-      }
-  });
+  //   this.userService.getCurrentUserProfile().subscribe({
+  //     next:(response: User) => {
+  //       console.log("=======================================================");
+  //       console.log(response);
+  //       this.user = response;
+  //     },
+  //     error:error => {
+  //       this.errorMessage = 'Unable to load user profile. Please try again.';
+  //       console.error(error);
+  //     }
+  // });
+
+  this.user = this.userService.getUser();
   }
 }
 // export class UserProfileComponent {

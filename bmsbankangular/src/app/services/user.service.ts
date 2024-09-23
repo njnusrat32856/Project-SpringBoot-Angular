@@ -49,13 +49,24 @@ export class UserService {
             const decodedToken = this.decodeToken(response.token);
             localStorage.setItem('userRole', decodedToken.role);
             this.userRoleSubject.next(decodedToken.role); // Update role in BehaviorSubject
+            localStorage.setItem('user', JSON.stringify(response.user));
           }
           return response;
         })
       );
   }
+
   getUserRole(): string | null {
     return localStorage.getItem('userRole');
+  }
+
+  getUser(): User | null {
+    let user = localStorage.getItem('user');
+    if (user != null) {
+      return JSON.parse(user);
+    } else {
+      return null;
+    }
   }
 
   // Register a new user

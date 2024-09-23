@@ -13,17 +13,17 @@ import { AuthGuard } from './guard/authguard.guard';
 
 const routes: Routes = [
   {
-    path: 'loan-list', component: LoanListComponent
+    path: 'loan-list', component: LoanListComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'transaction-list', component: TransactionListComponent
+    path: 'transaction-list', component: TransactionListComponent, canActivate: [AuthGuard]
   },
-  { path: 'deposit', component: DepositComponent },
+  { path: 'deposit', component: DepositComponent, canActivate: [AuthGuard] },
   {
-    path: 'transfer', component: TransferComponent
+    path: 'transfer', component: TransferComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'withdraw', component: WithdrawComponent
+    path: 'withdraw', component: WithdrawComponent, canActivate: [AuthGuard]
   },
   { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   {

@@ -20,7 +20,7 @@ public class JwtService {
     @Autowired
     private TokenRespository tokenRespository;
 
-    private final String SECRET_KEY = "";
+    private final String SECRET_KEY = "njkasdhibKJBPABDSB798434dnfjsfhnjsdfnjBPASJBDASBDJASDJ";
 
     private SecretKey getSecretKey() {
         byte[] keyBytes = Decoders.BASE64URL.decode(SECRET_KEY);

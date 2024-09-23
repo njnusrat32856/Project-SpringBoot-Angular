@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoanListComponent } from './components/loan-list/loan-list.component';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
 import { DepositComponent } from './components/deposit/deposit.component';
@@ -16,6 +16,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { LoginComponent } from './reg-login/login/login.component';
 import { RegisterComponent } from './reg-login/register/register.component';
 import { LogoutComponent } from './reg-login/logout/logout.component';
+import { TokenInterceptor } from './guard/TokenInterceptor';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LogoutComponent } from './reg-login/logout/logout.component';
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

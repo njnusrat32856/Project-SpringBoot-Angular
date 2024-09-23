@@ -16,6 +16,7 @@ export class RegisterComponent {
   registerForm: FormGroup;
   errorMessage: string | null = null;
   successMessage: string | null = null;
+  selectedImage: File | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -32,10 +33,17 @@ export class RegisterComponent {
       address: [''],
       dob: [''],
       gender: [''],
-      image: ['']
+      image: [''],
+      nid: [''],
+      accountType: [''],
+      createDate: [new Date()],
+      balance: ['']
     }
     ,{ validators: this.passwordMatchValidator });
   }
+  onImageSelected(event: any): void {
+      this.selectedImage = event.target.files[0];
+    }
 
   passwordMatchValidator(formGroup: FormGroup) {
     const password = formGroup.get('password')?.value;
@@ -48,9 +56,9 @@ export class RegisterComponent {
       return;
     }
 
-    const { firstName, lastName, email, password, mobileNo, address, dob, gender, image } = this.registerForm.value;
+    const { firstName, lastName, email, password, mobileNo, address, dob, gender, image, nid, accountType, createDate, balance } = this.registerForm.value;
 
-    this.authService.register({ firstName, lastName, email, password, mobileNo, address, dob, gender, image }).subscribe(
+    this.authService.register({ firstName, lastName, email, password, mobileNo, address, dob, gender, image, nid, accountType, createDate, balance }).subscribe(
    {
 
     next: AuthResponse => {

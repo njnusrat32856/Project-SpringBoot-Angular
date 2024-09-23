@@ -65,6 +65,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setAccountNumber(userService.generateUniqueAccountNumber());
         user.setRole(Role.valueOf("USER"));
+//        user.setLock(true);
         user.setStatus(false);
 //        user.setAddress(request.getAddress());
 //        user.setDob(request.getDob());
@@ -83,7 +84,7 @@ public class AuthService {
     }
     public AuthResponse authenticate(User request) {
 
-        authenticationManager.authenticate(
+         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
                         request.getPassword()

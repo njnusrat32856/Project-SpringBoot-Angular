@@ -1,40 +1,46 @@
 <div class="user-profile" *ngIf="user">
-    <h2>User Profile</h2>
-    
-    <div class="profile-field">
+  <h2>User Profile</h2>
+
+  
+  <div class="profile-image" *ngIf="user.image">
+    <img [src]="user.image" alt="Profile Image" />
+  </div>
+
+  <div class="profile-details">
+    <div class="profile-item">
       <strong>Account Number:</strong> {{ user.accountNumber }}
     </div>
-    <div class="profile-field">
+    <div class="profile-item">
       <strong>Full Name:</strong> {{ user.firstName }} {{ user.lastName }}
     </div>
-    <div class="profile-field">
+    <div class="profile-item">
       <strong>Email:</strong> {{ user.email }}
     </div>
-    <div class="profile-field">
+    <div class="profile-item">
       <strong>Gender:</strong> {{ user.gender }}
     </div>
-    <div class="profile-field">
+    <div class="profile-item">
       <strong>Address:</strong> {{ user.address }}
     </div>
-    <div class="profile-field">
+    <div class="profile-item">
       <strong>Mobile No:</strong> {{ user.mobileNo }}
     </div>
-    <div class="profile-field">
+    <div class="profile-item">
       <strong>NID:</strong> {{ user.nid }}
     </div>
-    <div class="profile-field">
+    <div class="profile-item">
       <strong>Date of Birth:</strong> {{ user.dob }}
     </div>
-    <div class="profile-field">
+    <div class="profile-item">
       <strong>Account Type:</strong> {{ user.accountType }}
     </div>
-    <div class="profile-field">
+    <div class="profile-item">
       <strong>Account Balance:</strong> {{ user.balance | currency }}
     </div>
-    <div class="profile-field">
+    <div class="profile-item">
       <strong>Account Status:</strong> {{ user.status ? 'Active' : 'Inactive' }}
     </div>
   </div>
-  
-  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-  
+</div>
+
+<p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>

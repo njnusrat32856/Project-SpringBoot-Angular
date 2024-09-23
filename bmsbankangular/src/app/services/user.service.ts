@@ -59,12 +59,13 @@ export class UserService {
   }
 
   // Register a new user
-  register(user: { firstName: string; lastName: string, email: string; password: string; mobileNo: string; address: string; dob: Date; gender: string; image: string }): Observable<AuthResponse> {
+  register(user: { firstName: string; lastName: string, email: string; password: string; mobileNo: string; address: string; dob: Date; gender: string; image: string; nid: string; accountType: string; createDate: Date; balance: number }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`,
       user, { headers: this.headers }).pipe(
         map((response: AuthResponse) => {
           if (this.isBrowser() && response.token) {
             localStorage.setItem('authToken', response.token); // Store JWT token
+            console.log(localStorage.getItem('authToken')+"***********************");
           }
           return response;
         })
@@ -89,16 +90,7 @@ export class UserService {
   }
 
   
-  // login(email: string, password: string): Observable<User> {
-  //   return this.http.post<User>(`${this.apiUrl}/login`, { email, password }).pipe(
-  //     map(user => {
-  //       // Store user details and jwt token in local storage
-  //       localStorage.setItem('currentUser', JSON.stringify(user));
-  //       this.currentUserSubject.next(user);
-  //       return user;
-  //     })
-  //   );
-  // }
+  
 
   // Logout the user
   logout(): void {
@@ -110,15 +102,15 @@ export class UserService {
     this.router.navigate(['/login']);
   }
 
-  // logout(): void {
-  //   // Remove user from local storage
-  //   localStorage.removeItem('currentUser');
-  //   this.currentUserSubject.next(null);
-  // }
+  
 
   // Fetch the current user profile
   // getUserProfile(): Observable<User> {
   //   return this.http.get<User>(`${this.apiUrl}/${this.currentUserValue?.id}`);
   // }
+
+  getCurrentUserProfile(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/user-profile`);
+  }
 
 }

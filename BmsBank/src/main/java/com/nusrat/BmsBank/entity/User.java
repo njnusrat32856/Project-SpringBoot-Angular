@@ -56,6 +56,7 @@ public class User implements UserDetails {
     private boolean status;
 
     private double balance;
+//    private boolean isLock;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;

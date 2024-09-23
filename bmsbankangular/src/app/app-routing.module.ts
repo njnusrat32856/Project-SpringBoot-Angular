@@ -9,6 +9,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { RegisterComponent } from './reg-login/register/register.component';
 import { LoginComponent } from './reg-login/login/login.component';
 import { LogoutComponent } from './reg-login/logout/logout.component';
+import { AuthGuard } from './guard/authguard.guard';
 
 const routes: Routes = [
   {
@@ -24,16 +25,16 @@ const routes: Routes = [
   {
     path: 'withdraw', component: WithdrawComponent
   },
-  { path: 'user-profile', component: UserProfileComponent },
+  { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   {
     path: 'register', component: RegisterComponent
   },
   {
     path: 'login', component: LoginComponent
   },
-  // {
-  //   path: '', redirectTo: 'login', pathMatch: 'full'
-  // },
+  {
+    path: '', redirectTo: 'login', pathMatch: 'full'
+  },
   {
     path: 'logout', component: LogoutComponent
   }

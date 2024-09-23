@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,13 +31,14 @@ public class SecurityConfig {
         return
                 http
                         .csrf(AbstractHttpConfigurer::disable)
+                        .cors(Customizer.withDefaults())
                         .authorizeHttpRequests(
 
                                 req ->
-                                        req.requestMatchers("/login", "/register", "/activate/**")
+                                        req.requestMatchers("/login", "/register", "/activate/**", "/user-profile")
                                                 .permitAll()
-//                                                .requestMatchers("api/hotel/save", "api/room/save")
-//                                                .hasAuthority("ADMIN")
+//                                                .requestMatchers("/user-profile")
+//                                                .hasAuthority("USER")
 //                                                .requestMatchers("api/hotel/{id}", "api/room/{id}","api/hotel/all/**")
 //                                                .hasAnyAuthority("ADMIN", "HOTEL")
 //                                                .requestMatchers("api/user/**")

@@ -39,45 +39,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(id).get();
     }
 
-    // Register a new user
-//    public User registerUser(User user) {
-//        // Check if email already exists
-//        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-//            throw new RuntimeException("Email already in use");
-//        }
-//
-//        // Encrypt the password before saving
-////        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//
-//        // Set createDate to the current date if not provided
-//        if (user.getCreateDate() == null) {
-//            user.setCreateDate(new Date(System.currentTimeMillis()));
-//        }
-//
-//        user.setAccountNumber(generateRandomNineDigitNumber());
-//        // Save the user
-//        return userRepository.save(user);
-//    }
-//    public User addUser(User user) {
-//
-//
-//        user.setAccountNumber(generateRandomNineDigitNumber());
-//
-//        return userRepository.save(user);
-//    }
 
-    // Authenticate user by email and password
-//    public User loginUser(String email, String password) {
-//        User user = userRepository.findByEmail(email)
-//                .orElseThrow(() -> new RuntimeException("Invalid email or password"));
-//
-////        // Check password match
-////        if (!passwordEncoder.matches(password, user.getPassword())) {
-////            throw new RuntimeException("Invalid email or password");
-////        }
-//
-//        return user;
-//    }
 
     public User updateUser(User user) {
         return userRepository.save(user);

@@ -5,13 +5,20 @@ import com.nusrat.BmsBank.entity.User;
 import com.nusrat.BmsBank.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
+
 public class AuthController {
 
     private final AuthService authService;
+
+    @GetMapping("/user-profile")
+    public ResponseEntity<User> getCurrentUser(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(user);
+    }
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody User request) {

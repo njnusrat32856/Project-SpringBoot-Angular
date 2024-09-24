@@ -14,22 +14,22 @@ export class TransactionService {
     private http: HttpClient
   ) { }
 
-  // Fetch all transactions
+  
   getTransactions(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(this.baseUrl);
   }
 
-  // Fetch a specific transaction by its ID
+  
   getTransactionById(id: number): Observable<Transaction> {
     return this.http.get<Transaction>(`${this.baseUrl}/${id}`);
   }
 
-  // Fetch transactions by user ID
+  
   getTransactionsByUserId(userId: number): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(`${this.baseUrl}/user/${userId}`);
   }
 
-  // Method for depositing money
+  
   depositMoney(userId: number, amount: number, description: string): Observable<any> {
     const url = `${this.baseUrl}deposit`;
 
@@ -43,7 +43,7 @@ export class TransactionService {
     return this.http.post(url, {}, { params });
   }
 
-  // Method for transferring money
+  
   transferMoney(senderId: number, receiverId: number, amount: number, description: string): Observable<any> {
     const url = `${this.baseUrl}transfer`;
 
@@ -58,7 +58,7 @@ export class TransactionService {
     return this.http.post(url, {}, { params });
   }
 
-  // Method for withdrawing money
+  
   withdrawMoney(userId: number, amount: number, description: string): Observable<any> {
     const url = `${this.baseUrl}withdraw`;
 
@@ -73,12 +73,12 @@ export class TransactionService {
   }
   
 
-  // Create a new transaction or update an existing one
-  saveTransaction(transaction: Transaction): Observable<Transaction> {
-    return this.http.post<Transaction>(this.baseUrl, transaction);
-  }
+  
+  // saveTransaction(transaction: Transaction): Observable<Transaction> {
+  //   return this.http.post<Transaction>(this.baseUrl, transaction);
+  // }
 
-  // Delete a transaction by its ID
+  
   deleteTransaction(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }

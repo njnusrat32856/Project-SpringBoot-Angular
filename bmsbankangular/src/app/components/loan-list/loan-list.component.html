@@ -1,11 +1,11 @@
 <div class="loan-list">
     <h2 style="text-align: center;">Loan List</h2>
     
-    <!-- Display an error message if something goes wrong -->
+    
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
   
-    <!-- Display the loan data in a table if loans exist -->
-    <table *ngIf="loans.length > 0" border="1">
+    
+    <table *ngIf="loans.length > 0" >
       <thead>
         <tr>
           <th>ID</th>
@@ -38,7 +38,7 @@
       </tbody>
     </table>
   
-    <!-- Display a message when no loans are available -->
+    
     <p *ngIf="loans.length === 0">No loans available.</p>
   </div>
   

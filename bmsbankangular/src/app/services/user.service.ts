@@ -69,7 +69,13 @@ export class UserService {
     }
   }
 
-  // Register a new user
+  updateUserInLocalStorage(updatedUser: User): void {
+    if (this.isBrowser()) {
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+    }
+  }
+
+  
   register(user: { firstName: string; lastName: string, email: string; password: string; mobileNo: string; address: string; dob: Date; gender: string; image: string; nid: string; accountType: string; createDate: Date; balance: number }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`,
       user, { headers: this.headers }).pipe(
@@ -87,7 +93,7 @@ export class UserService {
   }
   isTokenExpired(token: string): boolean {
     const decodedToken = this.decodeToken(token);
-    const expiry = decodedToken.exp * 1000; // Convert expiry to milliseconds
+    const expiry = decodedToken.exp * 1000; 
     return Date.now() > expiry;
   }
 
@@ -96,19 +102,15 @@ export class UserService {
     if (token && !this.isTokenExpired(token)) {
       return true;
     }
-    this.logout(); // Automatically log out if token is expired
+    this.logout(); 
     return false;
   }
-
   
-  
-
-  // Logout the user
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('authToken');
       localStorage.removeItem('userRole');
-      this.userRoleSubject.next(null); // Clear role in BehaviorSubject
+      this.userRoleSubject.next(null); 
     }
     this.router.navigate(['/login']);
   }
@@ -120,8 +122,8 @@ export class UserService {
   //   return this.http.get<User>(`${this.apiUrl}/${this.currentUserValue?.id}`);
   // }
 
-  getCurrentUserProfile(): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/user-profile`);
-  }
+  // getCurrentUserProfile(): Observable<User> {
+  //   return this.http.get<User>(`${this.apiUrl}/user-profile`,{ headers: this.headers });
+  // }
 
 }

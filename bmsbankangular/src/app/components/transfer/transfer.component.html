@@ -1,11 +1,11 @@
 <div class="transfer-form">
     <h2>Transfer Funds</h2>
   
-    <!-- Success and error messages -->
+    
     <p *ngIf="message" class="success">{{ message }}</p>
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
   
-    <!-- Transfer form -->
+    
     <form (ngSubmit)="makeTransfer()">
       <div>
         <label for="senderId">Sender ID:</label>

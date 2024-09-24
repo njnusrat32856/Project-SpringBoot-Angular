@@ -1,11 +1,11 @@
 <div class="deposit-form">
     <h2>Deposit Funds</h2>
   
-    <!-- Success and error messages -->
+    
     <p *ngIf="message" class="success">{{ message }}</p>
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
   
-    <!-- Deposit form -->
+    
     <form (ngSubmit)="makeDeposit()">
       <div>
         <label for="userId">User ID:</label>

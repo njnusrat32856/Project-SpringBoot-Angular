@@ -1,11 +1,11 @@
 <div class="withdraw-form">
     <h2>Withdraw Funds</h2>
   
-    <!-- Success and error messages -->
+    
     <p *ngIf="message" class="success">{{ message }}</p>
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
   
-    <!-- Withdrawal form -->
+    
     <form (ngSubmit)="makeWithdrawal()">
       <div>
         <label for="userId">User ID:</label>

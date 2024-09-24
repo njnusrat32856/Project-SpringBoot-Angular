@@ -15,10 +15,10 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @GetMapping("/user-profile")
-    public ResponseEntity<User> getCurrentUser(@AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(user);
-    }
+//    @GetMapping("/user-profile")
+//    public ResponseEntity<User> getCurrentUser(@AuthenticationPrincipal User user) {
+//        return ResponseEntity.ok(user);
+//    }
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody User request) {

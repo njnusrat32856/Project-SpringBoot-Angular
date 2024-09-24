@@ -1,11 +1,11 @@
 <div class="transaction-list">
     <h2 style="text-align: center;">Transaction List</h2>
     
-    <!-- Display an error message if something goes wrong -->
+    
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
   
-    <!-- Display the transaction data in a table if transactions exist -->
-    <table *ngIf="transactions.length > 0" border="1">
+    
+    <table *ngIf="transactions.length > 0" >
       <thead>
         <tr>
           <th>ID</th>
@@ -34,7 +34,7 @@
       </tbody>
     </table>
   
-    <!-- Display a message when no transactions are available -->
+    
     <p *ngIf="transactions.length === 0">No transactions available.</p>
   </div>
   

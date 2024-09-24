@@ -10,5 +10,5 @@ export class Transaction {
     targetAccountNumber !: string; 
 
     status !: boolean;
-    user!: User
+    userid!: User
 }

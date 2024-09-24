@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user.model';
 import { UserService } from '../../services/user.service';
+import { TransactionService } from '../../services/transaction.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,56 +12,39 @@ export class UserProfileComponent implements OnInit {
   user: User | null = null;
   errorMessage: string = '';
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private transactionService: TransactionService
+  ) {}
 
   ngOnInit(): void {
     this.loadUserProfile();
+    
   }
-
-  // Load the user profile
+  
   loadUserProfile(): void {
-  //   this.userService.getCurrentUserProfile().subscribe({
-  //     next:(response: User) => {
-  //       console.log("=======================================================");
-  //       console.log(response);
-  //       this.user = response;
-  //     },
-  //     error:error => {
-  //       this.errorMessage = 'Unable to load user profile. Please try again.';
-  //       console.error(error);
-  //     }
-  // });
-
+  
   this.user = this.userService.getUser();
   }
+  
+
+  updateUserBalance(updatedBalance: number): void {
+    if (this.user) {
+      this.user.balance = updatedBalance;
+      this.userService.updateUserInLocalStorage(this.user); // Update user data in localStorage
+      this.loadUserProfile(); // Refresh the user profile
+    }
+  }
+
+  // refreshUserProfile(): void {
+  //   this.userService.getUser().subscribe({
+  //     next:(response: User) => {
+  //       this.user = response; 
+  //     },
+  //     error:(error: any) => {
+  //       console.error('Failed to refresh user profile', error);
+  //     }
+  //   });
+  // }
 }
-// export class UserProfileComponent {
 
-//   user: User | null = null;
-//   errorMessage: string = '';
-
-//   constructor(private userService: UserService) {}
-
-//   ngOnInit(): void {
-//     const currentUser = this.userService.currentUserValue;
-//     if (currentUser){
-//       this.getUserProfile(currentUser.id);
-//     }
-    
-//   }
-
-//   // Fetch user profile by ID
-//   getUserProfile(userId: number): void {
-//     this.userService.getUserProfile().subscribe({
-//       next:(data: User) => {
-//         this.user = data;
-//       },
-//       error:(error) => {
-//         this.errorMessage = 'Error fetching user profile';
-//         console.error(error);
-//       }
-//   });
-//   }
-
-
-// }

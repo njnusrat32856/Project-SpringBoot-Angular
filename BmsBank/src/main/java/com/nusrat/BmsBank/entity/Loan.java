@@ -34,7 +34,7 @@ public class Loan {
 
     private boolean status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     private User user;
 

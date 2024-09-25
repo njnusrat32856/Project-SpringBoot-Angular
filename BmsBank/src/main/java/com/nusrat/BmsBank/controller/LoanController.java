@@ -34,7 +34,16 @@ public class LoanController {
         return loanService.getById(id);
     }
 
+    @GetMapping("/{userId}")
     public List<Loan> getLoanByUserId(long userId) {
         return loanService.getLoanByUserId(userId);
+    }
+
+
+    @PutMapping("/update/{id}")
+    public void updateLoan(@PathVariable long id,@RequestBody Loan loan) {
+
+
+        loanService.updateLoan(id, loan);
     }
 }

@@ -37,7 +37,7 @@ public class SecurityConfig {
                                 req ->
                                         req.requestMatchers("/login", "/register", "/activate/**", "/user-profile", "/api/transactions/",
                                                         "/api/transactions/deposit", "/api/transactions/withdraw", "/api/transactions/transfer",
-                                                        "/api/loans/")
+                                                        "/api/loans/", "/api/loans/save", "/api/loans/update/{id}")
                                                 .permitAll()
 //                                                .requestMatchers("/user-profile")
 //                                                .hasAuthority("USER")

@@ -28,6 +28,8 @@ public class Loan {
 
     private double durationInMonths;
 
+    private double balanceRemaining;
+
     private Date startDate;
 
     private Date endDate;

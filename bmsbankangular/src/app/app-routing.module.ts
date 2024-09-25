@@ -10,10 +10,18 @@ import { RegisterComponent } from './reg-login/register/register.component';
 import { LoginComponent } from './reg-login/login/login.component';
 import { LogoutComponent } from './reg-login/logout/logout.component';
 import { AuthGuard } from './guard/authguard.guard';
+import { LoanApplyComponent } from './components/loan-apply/loan-apply.component';
+import { LoanPaymentComponent } from './components/loan-payment/loan-payment.component';
 
 const routes: Routes = [
   {
     path: 'loan-list', component: LoanListComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'loan-apply', component: LoanApplyComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'loan-payment/:id', component: LoanPaymentComponent, canActivate: [AuthGuard]
   },
   {
     path: 'transaction-list', component: TransactionListComponent, canActivate: [AuthGuard]

@@ -21,22 +21,25 @@ export class LoanService {
 
   
   getLoanById(id: number): Observable<Loan> {
-    return this.http.get<Loan>(`${this.baseUrl}/${id}`);
+    return this.http.get<Loan>(`${this.baseUrl}${id}`);
   }
 
   
   getLoansByUserId(userId: number): Observable<Loan[]> {
-    return this.http.get<Loan[]>(`${this.baseUrl}/user/${userId}`);
+    return this.http.get<Loan[]>(`${this.baseUrl}userId`);
   }
 
   
   saveLoan(loan: Loan): Observable<Loan> {
-    return this.http.post<Loan>(this.baseUrl, loan);
+    return this.http.post<Loan>(`${this.baseUrl}save`, loan);
   }
 
+  updateLoan(id: number, loan: Loan): Observable<Loan> {
+    return this.http.put<Loan>(`${this.baseUrl}update/${id}`, loan);
+  }  
   
   deleteLoan(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}id`);
   }
 
   

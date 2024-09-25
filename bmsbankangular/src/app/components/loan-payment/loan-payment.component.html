@@ -1,0 +1,22 @@
+<div class="loan-payment-container">
+    <h2>Loan Payment</h2>
+
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <div *ngIf="loan">
+        <p><strong>Loan ID:</strong> {{ loan.id }}</p>
+        <p><strong>Loan Type:</strong> {{ loan.loanType }}</p>
+        <p><strong>Total Loan Amount:</strong> {{ loan.loanAmount | currency }}</p>
+        <p><strong>Remaining Balance:</strong> {{ loan.balanceRemaining | currency }}</p>
+
+        <form (ngSubmit)="makePayment()">
+            <div class="form-group">
+                <label for="paymentAmount">Payment Amount:</label>
+                <input type="number" id="paymentAmount" [(ngModel)]="paymentAmount" name="paymentAmount" required />
+            </div>
+
+            <button type="submit">Make Payment</button>
+        </form>
+    </div>
+</div>

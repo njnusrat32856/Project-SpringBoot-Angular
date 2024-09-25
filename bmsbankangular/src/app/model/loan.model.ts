@@ -10,6 +10,7 @@ export class Loan {
     durationInMonths !: number;
     startDate !: string;
     endDate !: string;
+    balanceRemaining !: number;
     status !: boolean;
 
     user !: User;

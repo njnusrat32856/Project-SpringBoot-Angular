@@ -24,26 +24,26 @@ public class LoanController {
         loanService.saveLoan(loan);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteLoan(@PathVariable long id) {
         loanService.deleteByIdLoan(id);
     }
 
     @GetMapping("/{id}")
-    public Loan getLoanById(long id) {
+    public Loan getLoanById(@PathVariable long id) {
         return loanService.getById(id);
     }
 
-    @GetMapping("/{userId}")
-    public List<Loan> getLoanByUserId(long userId) {
+    @GetMapping("/user/{userId}")
+    public List<Loan> getLoanByUserId(@PathVariable long userId) {
         return loanService.getLoanByUserId(userId);
     }
 
 
     @PutMapping("/update/{id}")
-    public void updateLoan(@PathVariable long id,@RequestBody Loan loan) {
+    public Loan updateLoan(@PathVariable long id,@RequestBody Loan loan) {
 
 
-        loanService.updateLoan(id, loan);
+        return loanService.updateLoan(id, loan);
     }
 }

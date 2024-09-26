@@ -19,6 +19,7 @@ import { LogoutComponent } from './reg-login/logout/logout.component';
 import { TokenInterceptor } from './guard/TokenInterceptor';
 import { LoanApplyComponent } from './components/loan-apply/loan-apply.component';
 import { LoanPaymentComponent } from './components/loan-payment/loan-payment.component';
+import { BankStatementComponent } from './components/bank-statement/bank-statement.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { LoanPaymentComponent } from './components/loan-payment/loan-payment.com
     RegisterComponent,
     LogoutComponent,
     LoanApplyComponent,
-    LoanPaymentComponent
+    LoanPaymentComponent,
+    BankStatementComponent
   ],
   imports: [
     BrowserModule,

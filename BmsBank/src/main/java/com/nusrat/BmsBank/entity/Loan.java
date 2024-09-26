@@ -26,7 +26,7 @@ public class Loan {
 
     private double monthlyPayment;
 
-    private double durationInMonths;
+    private int durationInMonths;
 
     private double balanceRemaining;
 

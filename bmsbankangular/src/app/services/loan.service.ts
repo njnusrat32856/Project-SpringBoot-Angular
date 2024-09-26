@@ -26,7 +26,7 @@ export class LoanService {
 
   
   getLoansByUserId(userId: number): Observable<Loan[]> {
-    return this.http.get<Loan[]>(`${this.baseUrl}userId`);
+    return this.http.get<Loan[]>(`${this.baseUrl}user/${userId}`);
   }
 
   
@@ -39,7 +39,7 @@ export class LoanService {
   }  
   
   deleteLoan(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}id`);
+    return this.http.delete<void>(`${this.baseUrl}delete/${id}`);
   }
 
   

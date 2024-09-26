@@ -12,6 +12,7 @@ import { LogoutComponent } from './reg-login/logout/logout.component';
 import { AuthGuard } from './guard/authguard.guard';
 import { LoanApplyComponent } from './components/loan-apply/loan-apply.component';
 import { LoanPaymentComponent } from './components/loan-payment/loan-payment.component';
+import { BankStatementComponent } from './components/bank-statement/bank-statement.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,9 @@ const routes: Routes = [
   },
   {
     path: 'withdraw', component: WithdrawComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'bank-statement', component: BankStatementComponent, canActivate: [AuthGuard]
   },
   { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   {

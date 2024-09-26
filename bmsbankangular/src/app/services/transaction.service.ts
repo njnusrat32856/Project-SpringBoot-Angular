@@ -21,12 +21,12 @@ export class TransactionService {
 
   
   getTransactionById(id: number): Observable<Transaction> {
-    return this.http.get<Transaction>(`${this.baseUrl}id`);
+    return this.http.get<Transaction>(`${this.baseUrl}${id}`);
   }
 
   
   getTransactionsByUserId(userId: number): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${this.baseUrl}userId`);
+    return this.http.get<Transaction[]>(`${this.baseUrl}user/${userId}`);
   }
 
   

@@ -23,7 +23,7 @@ export class BankStatementComponent implements OnInit {
   }
 
   loadUserTransactions(): void {
-    const user = this.userService.getUser(); // Assuming userService has a method to get the logged-in user
+    const user = this.userService.getUser(); 
     if (user) {
       this.userId = user.id;
       this.transactionService.getTransactionsByUserId(this.userId).subscribe({

@@ -25,7 +25,6 @@ export class LoanApplyComponent {
 
   applyLoan() {
 
-    // Calculate the end date before submitting the loan application
     if (this.loan.durationInMonths) {
       this.loan.endDate = this.calculateEndDate();
     }
@@ -44,40 +43,9 @@ export class LoanApplyComponent {
 
 
   calculateEndDate(): string {
-    // Calculate the end date based on the start date and duration in months
     const startDate = new Date(this.loan.startDate);
     startDate.setMonth(startDate.getMonth() + this.loan.durationInMonths);
     return startDate.toISOString().split('T')[0]; // Return in YYYY-MM-DD format
   }
-
-
-  // loan : Loan = {
-  //   id: 0,
-  //   loanType: '',
-  //   loanAmount: 0,
-  //   interestRate: 0,
-  //   monthlyPayment: 0,
-  //   durationInMonths: 0,
-  //   balanceRemaining: 0,
-  //   status: false, // Default status when applying
-  //   startDate: '',
-  //   endDate: '',
-    
-  // };
-
-  // constructor(
-  //   private loanService: LoanService
-  // ) {}
-  
-  // applyLoan(): void {
-  //   this.loanService.saveLoan(this.loan).subscribe({
-  //     next: res => {
-  //       alert('Loan application submitted successfully!');
-  //     },
-  //     error: err => {
-  //       alert('Failed to submit loan application. Please try again.');
-  //     }
-  //   });
-  // }
 
 }

@@ -31,7 +31,6 @@ export class TransactionListComponent implements OnInit{
     });
   }
 
-  
   deleteTransaction(id: number): void {
     if (confirm('Are you sure you want to delete this transaction?')) {
       this.transactionService.deleteTransaction(id).subscribe(() => {

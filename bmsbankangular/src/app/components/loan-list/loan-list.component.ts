@@ -21,7 +21,7 @@ export class LoanListComponent implements OnInit{
     this.getLoans();
   }
 
-  // Fetch all loans
+  
   getLoans(): void {
     this.loanService.getLoans().subscribe({
       next:(data: Loan[]) => {
@@ -34,7 +34,7 @@ export class LoanListComponent implements OnInit{
     });
   }
 
-  // Delete a loan
+  
   deleteLoan(id: number): void {
     this.loanService.deleteLoan(id).subscribe({
       next:() => {

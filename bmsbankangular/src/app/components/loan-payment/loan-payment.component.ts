@@ -25,18 +25,7 @@ export class LoanPaymentComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    // this.id = this.route.snapshot.params['id'];
-    // if (this.id) {
-    //   this.loanService.getLoanById(this.id).subscribe({
-    //     next: (data) => {
-    //       this.loan = data;
-    //     },
-    //     error: (error) => {
-    //       alert('Failed to load loan details.');
-    //     }
-    //   });
-    // }
-
+    
 
     this.getLoanDetails();
   }
@@ -51,65 +40,41 @@ export class LoanPaymentComponent implements OnInit{
       }
     });
   }
-
-  makePayment() {
-    if (!this.loan) {
-      this.errorMessage = 'No loan details available.';
-      return;
+  makePayment(): void {
+    if (this.paymentAmount > 0) {
+      this.loanService.makeLoanPayment(this.loanId, this.paymentAmount).subscribe({
+        next: (response: string) => {
+          this.successMessage = `Payment successful: ${response}`;
+          this.errorMessage = ''; 
+          this.paymentAmount = 0; 
+          this.getLoanDetails(); 
+        },
+        error: (error) => {
+          this.errorMessage = `Failed to process the payment. Please try again.`;
+          this.successMessage = ''; 
+        }
+      });
+    } else {
+      this.errorMessage = 'Please enter a valid payment amount greater than zero';
+      this.successMessage = ''; 
     }
-
-    if (this.paymentAmount <= 0) {
-      this.errorMessage = 'Please enter a valid payment amount.';
-      return;
-    }
-
-    // Check if payment amount exceeds remaining balance
-    if (this.loan.balanceRemaining < this.paymentAmount) {
-      this.errorMessage = 'Payment amount exceeds the remaining balance.';
-      return;
-    }
-
-    // Subtract the payment amount from the balance remaining
-    this.loan.balanceRemaining -= this.paymentAmount;
-
-    // Send updated loan details to the backend
-    this.loanService.updateLoan(this.loan.id, this.loan).subscribe(
-      () => {
-        this.successMessage = 'Payment successful!';
-        this.errorMessage = '';
-        this.paymentAmount = 0; // Reset payment amount input
-        this.getLoanDetails();  // Refresh loan details
-      },
-      (error) => {
-        this.errorMessage = 'Failed to process the payment. Please try again.';
-      }
-    );
   }
 
-  // makePayment() {
-  //   if (this.paymentAmount <= 0) {
-  //     this.errorMessage = 'Please enter a valid payment amount.';
-  //     return;
+  // makePayment(): void {
+  //   if (this.loanId && this.paymentAmount) {
+  //     this.loanService.makeLoanPayment(this.loanId, this.paymentAmount).subscribe({
+  //       next: (response: string) => {
+  //         this.successMessage = `Payment successful: ${response}`;
+  //         this.getLoanDetails(); // Reload the loan details after payment
+  //       },
+  //       error: (error) => {
+  //         // this.errorMessage = `Error making payment: ${error.error.message || 'Unknown error'}`;
+  //         this.errorMessage = `Failed to process the payment. Please try again.`;
+  //       }
+  //     });
+  //   } else {
+  //     this.errorMessage = 'Please enter a valid loan ID and payment amount';
   //   }
-
-  //   // Deduct the payment amount from the remaining balance
-  //   if (this.loan.balanceRemaining < this.paymentAmount) {
-  //     this.errorMessage = 'Payment amount exceeds the remaining balance.';
-  //     return;
-  //   }
-
-  //   // this.loan.balanceRemaining -= this.paymentAmount;
-
-  //   this.loanService.updateLoan(this.loan.id, this.loan).subscribe({
-  //     next: () => {
-  //       this.successMessage = 'Payment successful!';
-  //       this.errorMessage = '';
-  //       this.paymentAmount = 0; // Reset payment amount
-  //     },
-  //     error: (error) => {
-  //       this.errorMessage = 'Failed to process the payment. Please try again.';
-  //     }
-  //   });
   // }
 
 }

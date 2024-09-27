@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Loan } from '../model/loan.model';
@@ -42,6 +42,15 @@ export class LoanService {
     return this.http.delete<void>(`${this.baseUrl}delete/${id}`);
   }
 
+  makeLoanPayment(loanId: number, paymentAmount: number): Observable<string> {
+    const url = `${this.baseUrl}${loanId}/payment`;
+
+    // Set up query parameters
+    const params = new HttpParams().set('paymentAmount', paymentAmount.toString());
+
+    // Make the PUT request with parameters
+    return this.http.put<string>(url, {}, { params });
+  }
   
 
 }

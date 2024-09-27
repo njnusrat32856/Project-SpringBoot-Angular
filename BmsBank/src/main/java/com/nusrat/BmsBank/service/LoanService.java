@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LoanService {
@@ -52,27 +53,58 @@ public class LoanService {
 ////        loan.setBalanceRemaining(loan.getLoanAmount()-monthlyPay);
 //        loanRepository.save(loan);
 //    }
-
-    public Loan updateLoan(long id, Loan loan) {
-        Loan existingLoan = loanRepository.findById(id).orElse(null);
-
-        if (existingLoan != null) {
-            // Update the balance remaining by subtracting the payment amount
-            double paymentAmount = loan.getLoanAmount(); // This should be the payment amount sent from the frontend
-            double newBalanceRemaining = existingLoan.getBalanceRemaining() - paymentAmount;
-
-            if (newBalanceRemaining < 0) {
-                newBalanceRemaining = 0; // Ensure the balance doesn't go negative
-            }
-
-            existingLoan.setBalanceRemaining(newBalanceRemaining);
-            existingLoan.setMonthlyPayment(existingLoan.getMonthlyPayment()); // No change to monthly payment
-
-            // Save the updated loan
-            loanRepository.save(existingLoan);
-        }
-        return existingLoan;
+public void updateLoanPayment(Long loanId, double paymentAmount) {
+    // Retrieve the loan details from the repository
+    Optional<Loan> loanOpt = loanRepository.findById(loanId);
+    if (loanOpt.isEmpty()) {
+        throw new IllegalArgumentException("Loan not found");
     }
+
+    Loan loan = loanOpt.get();
+
+    // Check if the payment is more than the remaining balance
+    if (paymentAmount > loan.getBalanceRemaining()) {
+        throw new IllegalArgumentException("Payment amount exceeds remaining balance");
+    }
+
+    // Update the remaining balance
+    double newBalance = loan.getBalanceRemaining() - paymentAmount;
+    loan.setBalanceRemaining(newBalance);
+
+    // Increment the number of payments made
+    loan.setPaymentsMade(loan.getPaymentsMade() + 1);
+
+    // If the balance reaches zero, mark the loan as fully paid
+    if (newBalance <= 0) {
+        loan.setStatus("PAID");
+        loan.setBalanceRemaining(0); // Ensures balance doesn't go negative
+    }
+
+    // Save the updated loan details
+    loanRepository.save(loan);
+}
+
+
+//    public Loan updateLoan(long id, Loan loan) {
+//        Loan existingLoan = loanRepository.findById(id).orElse(null);
+//
+//        if (existingLoan != null) {
+//            // Update the balance remaining by subtracting the payment amount
+//            double paymentAmount = loan.getLoanAmount(); // This should be the payment amount sent from the frontend
+//            double newBalanceRemaining = existingLoan.getBalanceRemaining() - paymentAmount;
+//
+//            if (newBalanceRemaining < 0) {
+//                newBalanceRemaining = 0; // Ensure the balance doesn't go negative
+//            }
+//
+//            existingLoan.setBalanceRemaining(newBalanceRemaining);
+//            existingLoan.setMonthlyPayment(existingLoan.getMonthlyPayment()); // No change to monthly payment
+//
+//            // Save the updated loan
+//            loanRepository.save(existingLoan);
+//        }
+//        return existingLoan;
+//    }
 
 
 

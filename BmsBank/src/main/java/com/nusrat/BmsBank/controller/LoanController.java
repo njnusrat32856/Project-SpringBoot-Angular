@@ -3,6 +3,7 @@ package com.nusrat.BmsBank.controller;
 import com.nusrat.BmsBank.entity.Loan;
 import com.nusrat.BmsBank.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,11 +40,20 @@ public class LoanController {
         return loanService.getLoanByUserId(userId);
     }
 
-
-    @PutMapping("/update/{id}")
-    public Loan updateLoan(@PathVariable long id,@RequestBody Loan loan) {
-
-
-        return loanService.updateLoan(id, loan);
+    @PutMapping("/{loanId}/payment")
+    public ResponseEntity<String> makeLoanPayment(@PathVariable Long loanId, @RequestParam double paymentAmount) {
+        try {
+            loanService.updateLoanPayment(loanId, paymentAmount);
+            return ResponseEntity.ok("Payment successful and loan updated.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
+
+//    @PutMapping("/update/{id}")
+//    public Loan updateLoan(@PathVariable long id,@RequestBody Loan loan) {
+//
+//
+//        return loanService.updateLoan(id, loan);
+//    }
 }

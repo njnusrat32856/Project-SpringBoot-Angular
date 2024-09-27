@@ -11,8 +11,8 @@ export class Loan {
     startDate !: string;
     endDate !: string;
     balanceRemaining !: number;
-    status !: boolean;
-
+    status !: string;
+    paymentsMade !: number
     user !: User;
 
 }

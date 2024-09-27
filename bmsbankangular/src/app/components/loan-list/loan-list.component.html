@@ -17,7 +17,7 @@
           <th>Start <br> Date</th>
           <th>End <br> Date</th>
           <th>Remaining <br> Balance</th>
-          <th>Status</th>
+          <!-- <th>Status</th> -->
           <th>Actions</th>
         </tr>
       </thead>
@@ -32,7 +32,7 @@
           <td>{{ loan.startDate }}</td>
           <td>{{ loan.endDate }}</td>
           <td>{{ loan.balanceRemaining | currency }}</td>
-          <td>{{ loan.status ? 'Approved' : 'Pending' }}</td>
+          <!-- <td>{{ loan.status ? 'Approved' : 'Pending' }}</td> -->
           <td>
             <button (click)="navigateToPayment(loan.id)">Make Payment</button>
             <button (click)="deleteLoan(loan.id)">Delete</button>

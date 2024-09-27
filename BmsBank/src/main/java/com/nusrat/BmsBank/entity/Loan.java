@@ -34,7 +34,9 @@ public class Loan {
 
     private Date endDate;
 
-    private boolean status;
+    private String status;
+
+    private double paymentsMade;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")

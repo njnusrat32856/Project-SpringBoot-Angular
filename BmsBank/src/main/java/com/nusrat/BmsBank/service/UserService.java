@@ -31,22 +31,22 @@ public class UserService implements UserDetailsService {
 
 
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    public User getUserById(long id) {
-        return userRepository.findById(id).get();
-    }
-
-
-
-    public User updateUser(User user) {
-        return userRepository.save(user);
-    }
-    public void deleteUser(long id) {
-        userRepository.deleteById(id);
-    }
+//    public List<User> getAllUsers() {
+//        return userRepository.findAll();
+//    }
+//
+//    public User getUserById(long id) {
+//        return userRepository.findById(id).get();
+//    }
+//
+//
+//
+//    public User updateUser(User user) {
+//        return userRepository.save(user);
+//    }
+//    public void deleteUser(long id) {
+//        userRepository.deleteById(id);
+//    }
 
 
 

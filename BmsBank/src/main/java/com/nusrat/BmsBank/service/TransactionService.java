@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TransactionService {
@@ -50,7 +51,7 @@ public class TransactionService {
         transaction.setTransactionType(TransactionType.DEPOSIT);
         transaction.setDescription(description);
         transaction.setTargetAccountNumber(user.getAccountNumber());  // Assuming User has an accountNumber
-        transaction.setStatus(true);  // Assuming deposit is always successful
+        transaction.setStatus("PENDING");  // Assuming deposit is always successful
         transaction.setUser(user);
         transaction.setBalance(user.getBalance());  // Set updated balance in the transaction
 
@@ -78,7 +79,7 @@ public class TransactionService {
         transaction.setTransactionType(TransactionType.WITHDRAW);
         transaction.setDescription(description);
         transaction.setTargetAccountNumber(user.getAccountNumber());  // Assuming User has an accountNumber
-        transaction.setStatus(true);  // Assuming withdrawal is successful
+        transaction.setStatus("PENDING");  // Assuming withdrawal is successful
         transaction.setUser(user);
         transaction.setBalance(user.getBalance());  // Set updated balance in the transaction
 
@@ -115,8 +116,8 @@ public class TransactionService {
         senderTransaction.setAmount(amount);
         senderTransaction.setTransactionType(TransactionType.FUND_TRANSFER);
         senderTransaction.setDescription(description);
-        senderTransaction.setTargetAccountNumber(receiver.getAccountNumber());
-        senderTransaction.setStatus(true);  // Assuming transfer is successful
+        senderTransaction.setTargetAccountNumber(sender.getAccountNumber());
+        senderTransaction.setStatus("PENDING");  // Assuming transfer is successful
         senderTransaction.setUser(sender);
         senderTransaction.setBalance(sender.getBalance());  // Updated sender's balance after the transfer
 
@@ -129,8 +130,8 @@ public class TransactionService {
         receiverTransaction.setAmount(amount);
         receiverTransaction.setTransactionType(TransactionType.FUND_TRANSFER);
         receiverTransaction.setDescription("Received from " + sender.getAccountNumber());
-        receiverTransaction.setTargetAccountNumber(sender.getAccountNumber());
-        receiverTransaction.setStatus(true);  // Assuming transfer is successful
+        receiverTransaction.setTargetAccountNumber(receiver.getAccountNumber());
+        receiverTransaction.setStatus("PENDING");  // Assuming transfer is successful
         receiverTransaction.setUser(receiver);
         receiverTransaction.setBalance(receiver.getBalance());  // Updated receiver's balance after the transfer
 
@@ -145,5 +146,18 @@ public class TransactionService {
 
     public void deleteById(long id) {
         transactionRepository.deleteById(id);
+    }
+
+    public void updateTransactionStatus(Long transactionId, String status) {
+        Optional<Transaction> transactionOpt = transactionRepository.findById(transactionId);
+
+        if (transactionOpt.isPresent()) {
+            Transaction transaction = transactionOpt.get();
+            transaction.setStatus(status); // Assuming the Transaction entity has a 'status' field
+            transactionRepository.save(transaction);
+        } else {
+            throw new RuntimeException("Transaction with ID " + transactionId + " not found.");
+        }
+
     }
 }

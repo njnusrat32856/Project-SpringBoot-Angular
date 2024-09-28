@@ -24,7 +24,8 @@ export class WithdrawComponent {
 
     this.transactionService.withdrawMoney(this.userId, this.amount, this.description).subscribe({
       next: (response) => {
-        this.message = `Successfully withdrew ${this.amount} for user ${this.userId}.`;
+        alert("Your withdraw of "+`${this.amount}`+" is pending approval. Once approved by the admin, your balance will be updated.");
+        // this.message = `Successfully withdrew ${this.amount} for user ${this.userId}.`;
         this.errorMessage = '';
         this.clearForm();
       },

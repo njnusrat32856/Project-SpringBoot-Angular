@@ -30,6 +30,18 @@ export class TransactionListComponent implements OnInit{
       }
     });
   }
+  changeTransactionStatus(transactionId: number, status: string): void {
+    this.transactionService.updateTransactionStatus(transactionId, status).subscribe({
+      next: () => {
+        this.transactions = this.transactions.map(transaction => 
+          transaction.id === transactionId ? { ...transaction, status: status } : transaction
+        );
+      },
+      error: (error) => {
+        this.errorMessage = `Failed to update transaction status. Please try again.`;
+      }
+    });
+  }
 
   deleteTransaction(id: number): void {
     if (confirm('Are you sure you want to delete this transaction?')) {

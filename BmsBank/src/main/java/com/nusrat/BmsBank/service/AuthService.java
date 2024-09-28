@@ -58,22 +58,13 @@ public class AuthService {
             return new AuthResponse(null, "User already exists", null);
 
         }
-//        User user = new User();
-//        user.setFirstName(request.getFirstName());
-//        user.setLastName(request.getLastName());
-//        user.setEmail(request.getEmail());
+//
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setAccountNumber(userService.generateUniqueAccountNumber());
         user.setRole(Role.valueOf("USER"));
-//        user.setLock(true);
+        user.setLock(true);
         user.setStatus(false);
-//        user.setAddress(request.getAddress());
-//        user.setDob(request.getDob());
-//        user.setGender(request.getGender());
-//        user.setNid(request.getNid());
-//        user.setMobileNo(request.getMobileNo());
-//        user.setAccountType(request.getAccountType());
-//        user.setBalance(request.getBalance());
+//
         userRepository.save(user);
 
         String jwt = jwtService.generateToken(user);

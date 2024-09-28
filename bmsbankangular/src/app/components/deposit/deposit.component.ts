@@ -25,7 +25,8 @@ export class DepositComponent {
 
     this.transactionService.depositMoney(this.userId, this.amount, this.description).subscribe({
       next:(response) => {
-        this.message = `Successfully deposited ${this.amount} for user ${this.userId}.`;
+        alert("Your deposit of "+`${this.amount}`+" is pending approval. Once approved by the admin, your balance will be updated.");
+        // this.message = `Successfully deposited ${this.amount} for user ${this.userId}.`;
         this.errorMessage = '';
         this.clearForm();
       },

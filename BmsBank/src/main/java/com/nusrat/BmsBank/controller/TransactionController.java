@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/transactions")
@@ -28,6 +29,13 @@ public class TransactionController {
     @GetMapping("/user/{userId}")
     public List<Transaction> getTransactionsByUserId(@PathVariable long userId) {
         return transactionService.getTransactionByUserId(userId);
+    }
+
+    @PutMapping("/{transactionId}/status")
+    public ResponseEntity<?> updateTransactionStatus(@PathVariable Long transactionId, @RequestBody Map<String, String> statusRequest) {
+        String status = statusRequest.get("status");
+        transactionService.updateTransactionStatus(transactionId, status);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/deposit")

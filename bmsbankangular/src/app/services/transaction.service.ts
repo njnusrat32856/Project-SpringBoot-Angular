@@ -78,6 +78,9 @@ export class TransactionService {
   //   return this.http.post<Transaction>(this.baseUrl, transaction);
   // }
 
+  updateTransactionStatus(transactionId: number, status: string): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}${transactionId}/status`, { status });
+  }
   
   deleteTransaction(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);

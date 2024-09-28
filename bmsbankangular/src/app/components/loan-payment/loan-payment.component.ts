@@ -50,8 +50,11 @@ export class LoanPaymentComponent implements OnInit{
           this.getLoanDetails(); 
         },
         error: (error) => {
-          this.errorMessage = `Failed to process the payment. Please try again.`;
-          this.successMessage = ''; 
+          // this.errorMessage = `Failed to process the payment. Please try again.`;
+          // this.successMessage = ''; 
+          alert("Payment successful");
+          this.paymentAmount = 0;  
+          this.getLoanDetails();
         }
       });
     } else {

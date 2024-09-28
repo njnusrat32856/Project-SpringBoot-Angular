@@ -9,6 +9,6 @@ export class Transaction {
     description !: string;
     targetAccountNumber !: string; 
 
-    status !: boolean;
+    status !: string;
     userid!: User
 }

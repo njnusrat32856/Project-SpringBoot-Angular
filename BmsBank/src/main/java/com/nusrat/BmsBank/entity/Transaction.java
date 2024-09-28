@@ -30,7 +30,7 @@ public class Transaction {
 
     private String targetAccountNumber;
 
-    private boolean status;
+    private String status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")

@@ -68,6 +68,13 @@ export class UserService {
       return null;
     }
   }
+  isAdmin(): boolean {
+    return this.getUserRole() === 'ADMIN';
+  }
+
+  isUser(): boolean {
+    return this.getUserRole() === 'USER';
+  }
 
   updateUserInLocalStorage(updatedUser: User): void {
     if (this.isBrowser()) {
@@ -115,15 +122,9 @@ export class UserService {
     this.router.navigate(['/login']);
   }
 
-  
-
-  // Fetch the current user profile
-  // getUserProfile(): Observable<User> {
-  //   return this.http.get<User>(`${this.apiUrl}/${this.currentUserValue?.id}`);
-  // }
-
-  // getCurrentUserProfile(): Observable<User> {
-  //   return this.http.get<User>(`${this.apiUrl}/user-profile`,{ headers: this.headers });
-  // }
+  hasRole(roles: string): boolean {
+    const userRole = this.getUserRole();
+    return userRole ? roles.includes(userRole) : false;
+  }
 
 }

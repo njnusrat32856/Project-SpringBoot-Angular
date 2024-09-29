@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { User } from '../../model/user.model';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 // import { UserModel } from '../../model/user.model';
 // import { AuthService } from '../../services/auth.service';
 
@@ -9,22 +10,42 @@ import { UserService } from '../../services/user.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
-
-}
-// export class HeaderComponent implements OnInit{
-
-//   userRole: string | null = '';
-//   currentUser: User | null = null;
-
-//   constructor(private authService: UserService) {
-//   }
-
-//   ngOnInit(): void {
-//     this.authService.userRole$.subscribe(user => {
-//       this.userRole = user;
-//       this.userRole = user?.role || null;
-//     });
-//   }
+// export class HeaderComponent {
 
 // }
+export class HeaderComponent implements OnInit{
+
+  isAdmin = false;
+  
+  isUser = false;
+
+  userRole: string | null = null;
+
+
+  constructor( public authService: UserService,
+    private router:Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
+
+
+  ngOnInit(): void {
+    this.authService.userRole$.subscribe(role => {
+      this.isAdmin = role === 'ADMIN';
+      this.isUser = role === 'USER';
+    });
+  }
+
+  // userRole: string | null = '';
+  // currentUser: User | null = null;
+
+  // constructor(private authService: UserService) {
+  // }
+
+  // ngOnInit(): void {
+  //   this.authService.userRole$.subscribe(role => {
+  //     this.userRole = role;
+  //     // this.userRole = user?.role || null;
+  //   });
+  // }
+
+}

@@ -31,7 +31,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
 
-    private final EmailService emailService;
+//    private final EmailService emailService;
 
     private void saveUserToken(String jwt, User user) {
 
@@ -69,9 +69,26 @@ public class AuthService {
 
         String jwt = jwtService.generateToken(user);
         saveUserToken(jwt, user);
-        sendActivationEmail(user);
+//        sendActivationEmail(user);
 
         return new AuthResponse(jwt, "User registration was successful", null);
+    }
+
+    public AuthResponse registerAdmin(User user) {
+        if (userRepository.findByEmail(user.getUsername()).isPresent()) {
+            return new AuthResponse(null, "Admin already exists", null);
+
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.valueOf("ADMIN"));
+        user.setLock(false);
+        user.setStatus(true);
+        userRepository.save(user);
+        String jwt = jwtService.generateToken(user);
+        saveUserToken(jwt, user);
+
+
+        return new AuthResponse(jwt, "Admin registration was successful", null);
     }
     public AuthResponse authenticate(User request) {
 
@@ -95,25 +112,25 @@ public class AuthService {
         return new AuthResponse(jwt,"User login was successful", user);
     }
 
-    private void sendActivationEmail(User user) {
-        String activationLink = "http://localhost:8084/activate/" + user.getId();
-
-        String mailText = "<h3>Dear " + user.getFirstName()+ user.getLastName()
-                + ",</h3>"
-                + "<p>Please click on the following link to confirm your account:</p>"
-                + "<a href=\"" + activationLink + "\">Activate Account</a>"
-                + "<br><br>Regards,<br>Hotel Booking";
-
-        String subject = "Confirm User Account";
-
-        try {
-
-            emailService.sendSimpleEmail(user.getEmail(), subject, mailText);
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    private void sendActivationEmail(User user) {
+//        String activationLink = "http://localhost:8084/activate/" + user.getId();
+//
+//        String mailText = "<h3>Dear " + user.getFirstName()+ user.getLastName()
+//                + ",</h3>"
+//                + "<p>Please click on the following link to confirm your account:</p>"
+//                + "<a href=\"" + activationLink + "\">Activate Account</a>"
+//                + "<br><br>Regards,<br>Hotel Booking";
+//
+//        String subject = "Confirm User Account";
+//
+//        try {
+//
+//            emailService.sendSimpleEmail(user.getEmail(), subject, mailText);
+//
+//        } catch (MessagingException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
     public String activateUser(long id) {
 
         User user = userRepository.findById(id)

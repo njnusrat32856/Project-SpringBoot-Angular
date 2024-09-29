@@ -28,13 +28,13 @@ export class UserProfileComponent implements OnInit {
   }
   
 
-  updateUserBalance(updatedBalance: number): void {
-    if (this.user) {
-      this.user.balance = updatedBalance;
-      this.userService.updateUserInLocalStorage(this.user); // Update user data in localStorage
-      this.loadUserProfile(); // Refresh the user profile
-    }
-  }
+  // updateUserBalance(updatedBalance: number): void {
+  //   if (this.user) {
+  //     this.user.balance = updatedBalance;
+  //     this.userService.updateUserInLocalStorage(this.user); // Update user data in localStorage
+  //     this.loadUserProfile(); // Refresh the user profile
+  //   }
+  // }
 
   // refreshUserProfile(): void {
   //   this.userService.getUser().subscribe({

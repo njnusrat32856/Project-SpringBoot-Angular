@@ -13,6 +13,8 @@ import { AuthGuard } from './guard/authguard.guard';
 import { LoanApplyComponent } from './components/loan-apply/loan-apply.component';
 import { LoanPaymentComponent } from './components/loan-payment/loan-payment.component';
 import { BankStatementComponent } from './components/bank-statement/bank-statement.component';
+import { AdminRegisterComponent } from './reg-login/admin-register/admin-register.component';
+import { UserRoleGuard } from './guard/user-role.guard';
 
 const routes: Routes = [
   {
@@ -40,6 +42,9 @@ const routes: Routes = [
   { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   {
     path: 'register', component: RegisterComponent
+  },
+  {
+    path: 'registerAdmin', component: AdminRegisterComponent
   },
   {
     path: 'login', component: LoginComponent

@@ -35,16 +35,17 @@ public class SecurityConfig {
                         .authorizeHttpRequests(
 
                                 req ->
-                                        req.requestMatchers("/login", "/register", "/activate/**", "/user-profile", "/api/transactions/",
-                                                        "/api/transactions/deposit", "/api/transactions/withdraw", "/api/transactions/transfer",
-                                                        "/api/loans/", "/api/loans/save","/api/loans/{id}", "/api/loans/delete/{id}" , "api/loans/{loanId}/payment", "/api/loans/update/{id}",
-                                                        "/api/loans/user/{userId}", "/api/transactions/user/{userId}", "/api/transactions/{id}",
-                                                        "api/transactions/{transactionId}/status")
+                                        req.requestMatchers("/login", "/register", "/activate/**", "user-profile", "api/transactions/",
+                                                        "api/transactions/deposit", "api/transactions/withdraw", "api/transactions/transfer",
+                                                        "api/loans/", "api/loans/save","api/loans/{id}", "api/loans/delete/{id}" ,
+                                                        "api/loans/{loanId}/payment", "api/loans/update/{id}",
+                                                        "api/loans/user/{userId}", "api/transactions/user/{userId}", "api/transactions/{id}",
+                                                         "/register/admin")
                                                 .permitAll()
-//                                                .requestMatchers("/user-profile")
-//                                                .hasAuthority("USER")
-//                                                .requestMatchers("api/hotel/{id}", "api/room/{id}","api/hotel/all/**")
-//                                                .hasAnyAuthority("ADMIN", "HOTEL")
+                                                .requestMatchers("api/transactions/","api/transactions/{transactionId}/status")
+                                                .hasAuthority("ADMIN")
+                                                .requestMatchers("api/transactions/user/{userId}")
+                                                .hasAuthority("USER")
 
 
                         )

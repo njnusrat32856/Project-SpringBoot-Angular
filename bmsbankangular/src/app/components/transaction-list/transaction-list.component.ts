@@ -1,30 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaction } from '../../model/transaction.model';
 import { TransactionService } from '../../services/transaction.service';
+import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-list',
   templateUrl: './transaction-list.component.html',
   styleUrl: './transaction-list.component.css'
 })
-export class TransactionListComponent implements OnInit{
-  
+export class TransactionListComponent implements OnInit {
+
   transactions: Transaction[] = [];
   errorMessage: string = '';
+  isAuthorized: boolean = false;
 
-  constructor(private transactionService: TransactionService) {}
-  
+  constructor(
+    private transactionService: TransactionService,
+    private router: Router,
+    private userService: UserService
+  ) { }
+
   ngOnInit(): void {
     this.fetchTransactions();
+
+
+    this.isAuthorized = this.userService.hasRole('ADMIN');
+
+    if (!this.isAuthorized) {
+      alert('You are not authorized to see All Account Transaction list.');
+      this.router.navigate(['/']); // Redirect to another page if not authorized
+      return;
+    }
   }
 
-  
+
   fetchTransactions(): void {
     this.transactionService.getTransactions().subscribe({
-      next:(data: Transaction[]) => {
+      next: (data: Transaction[]) => {
         this.transactions = data;
       },
-      error:(error) => {
+      error: (error) => {
         this.errorMessage = 'Error fetching transaction data';
         console.error(error);
       }
@@ -33,7 +49,7 @@ export class TransactionListComponent implements OnInit{
   changeTransactionStatus(transactionId: number, status: string): void {
     this.transactionService.updateTransactionStatus(transactionId, status).subscribe({
       next: () => {
-        this.transactions = this.transactions.map(transaction => 
+        this.transactions = this.transactions.map(transaction =>
           transaction.id === transactionId ? { ...transaction, status: status } : transaction
         );
       },

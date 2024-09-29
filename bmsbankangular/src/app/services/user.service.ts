@@ -25,8 +25,12 @@ export class UserService {
     private router: Router
   ) {
     // Initialize the role from localStorage
-    const storedRole = this.isBrowser() ? localStorage.getItem('userRole') : null;
-    this.userRoleSubject.next(storedRole);
+    if (this.isBrowser()) {
+      const storedRole = localStorage.getItem('userRole');
+      this.userRoleSubject.next(storedRole);
+    }
+    // const storedRole = this.isBrowser() ? localStorage.getItem('userRole') : null;
+    // this.userRoleSubject.next(storedRole);
   }
   private isBrowser(): boolean {
     return isPlatformBrowser(this.platformId);
@@ -57,10 +61,14 @@ export class UserService {
   }
 
   getUserRole(): string | null {
-    return localStorage.getItem('userRole');
+    if (this.isBrowser()) {
+      return localStorage.getItem('userRole');
+    }
+    return null;
   }
 
   getUser(): User | null {
+    
     let user = localStorage.getItem('user');
     if (user != null) {
       return JSON.parse(user);
@@ -76,11 +84,11 @@ export class UserService {
     return this.getUserRole() === 'USER';
   }
 
-  updateUserInLocalStorage(updatedUser: User): void {
-    if (this.isBrowser()) {
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-    }
-  }
+  // updateUserInLocalStorage(updatedUser: User): void {
+  //   if (this.isBrowser()) {
+  //     localStorage.setItem('user', JSON.stringify(updatedUser));
+  //   }
+  // }
 
   
   register(user: { firstName: string; lastName: string, email: string; password: string; mobileNo: string; address: string; dob: Date; gender: string; image: string; nid: string; accountType: string; createDate: Date; balance: number }): Observable<AuthResponse> {
@@ -95,8 +103,23 @@ export class UserService {
         })
       );
   }
+  registerAdmin(user: { firstName: string; lastName: string, email: string; password: string; mobileNo: string; address: string; dob: Date; gender: string; image: string; nid: string}): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/register/admin`,
+      user, { headers: this.headers }).pipe(
+        map((response: AuthResponse) => {
+          if (this.isBrowser() && response.token) {
+            localStorage.setItem('authToken', response.token); // Store JWT token
+            console.log(localStorage.getItem('authToken')+"admin");
+          }
+          return response;
+        })
+      );
+  }
   getToken(): string | null {
-    return localStorage.getItem('authToken');
+    if (this.isBrowser()) {
+      return localStorage.getItem('authToken');
+    }
+    return null;
   }
   isTokenExpired(token: string): boolean {
     const decodedToken = this.decodeToken(token);
@@ -114,7 +137,7 @@ export class UserService {
   }
   
   logout(): void {
-    if (isPlatformBrowser(this.platformId)) {
+    if (this.isBrowser()) {
       localStorage.removeItem('authToken');
       localStorage.removeItem('userRole');
       this.userRoleSubject.next(null); 

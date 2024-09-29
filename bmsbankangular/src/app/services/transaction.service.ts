@@ -1,7 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Transaction } from '../model/transaction.model';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,22 +12,34 @@ export class TransactionService {
   baseUrl = 'http://localhost:8084/api/transactions/';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private userService: UserService
   ) { }
 
+  private getAuthHeaders(): HttpHeaders {
+    const token = this.userService.getToken();
+    console.log(token);
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  }
   
   getTransactions(): Observable<Transaction[]> {
+    const headers = this.getAuthHeaders();
     return this.http.get<Transaction[]>(this.baseUrl);
   }
 
   
   getTransactionById(id: number): Observable<Transaction> {
-    return this.http.get<Transaction>(`${this.baseUrl}${id}`);
+    const headers = this.getAuthHeaders();
+    return this.http.get<Transaction>(`${this.baseUrl}${id}`, {headers});
   }
 
   
   getTransactionsByUserId(userId: number): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${this.baseUrl}user/${userId}`);
+    const headers = this.getAuthHeaders();
+    return this.http.get<Transaction[]>(`${this.baseUrl}user/${userId}`, {headers});
   }
 
   

@@ -31,7 +31,8 @@ export class HeaderComponent implements OnInit{
   ngOnInit(): void {
     this.authService.userRole$.subscribe(role => {
       this.isAdmin = role === 'ADMIN';
-      this.isUser = role === 'USER';
+      this.isUser = this.authService.isUser();
+      // this.isUser = role === 'USER';
     });
   }
 

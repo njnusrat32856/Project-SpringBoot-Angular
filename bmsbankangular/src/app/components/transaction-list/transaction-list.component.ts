@@ -25,13 +25,13 @@ export class TransactionListComponent implements OnInit {
     this.fetchTransactions();
 
 
-    this.isAuthorized = this.userService.hasRole('ADMIN');
+    // this.isAuthorized = this.userService.hasRole('ADMIN');
 
-    if (!this.isAuthorized) {
-      alert('You are not authorized to see All Account Transaction list.');
-      this.router.navigate(['/']); // Redirect to another page if not authorized
-      return;
-    }
+    // if (!this.isAuthorized) {
+    //   alert('You are not authorized to see All Account Transaction list.');
+    //   this.router.navigate(['/']); // Redirect to another page if not authorized
+    //   return;
+    // }
   }
 
 

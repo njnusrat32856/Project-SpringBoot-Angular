@@ -92,11 +92,13 @@ export class TransactionService {
   // }
 
   updateTransactionStatus(transactionId: number, status: string): Observable<void> {
-    return this.http.put<void>(`${this.baseUrl}${transactionId}/status`, { status });
+    const headers = this.getAuthHeaders();
+    return this.http.put<void>(`${this.baseUrl}${transactionId}/status`, { status }, { headers });
   }
   
   deleteTransaction(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    const headers = this.getAuthHeaders();
+    return this.http.delete<void>(`${this.baseUrl}${id}`, {headers});
   }
 
 }

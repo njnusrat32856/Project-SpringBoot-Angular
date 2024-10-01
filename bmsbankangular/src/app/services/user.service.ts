@@ -17,6 +17,8 @@ export class UserService {
   private userRoleSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   public userRole$: Observable<string | null> = this.userRoleSubject.asObservable();
 
+  private currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  public currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
   
 
   constructor(

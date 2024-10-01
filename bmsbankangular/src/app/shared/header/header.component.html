@@ -54,7 +54,7 @@
                     </div> -->
 
                     <!-- *ngIf="userRole === 'USER'" -->
-                    <ng-container >
+                    <ng-container *ngIf="this.authService.getUserRole() === 'USER'">
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profile</a>
                             <div class="dropdown-menu m-0">

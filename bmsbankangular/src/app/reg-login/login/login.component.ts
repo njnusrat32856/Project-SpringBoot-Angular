@@ -36,14 +36,14 @@ export class LoginComponent {
 
     this.authService.login(email, password).subscribe({
       next: (response) => {
-        if (this.authService.hasRole('ADMIN')) {
-          this.router.navigate(['/transaction-list']);
-        } else if (this.authService.hasRole('USER')) {
-          this.router.navigate(['/user-profile']);
-        }
+        // if (this.authService.hasRole('ADMIN')) {
+        //   this.router.navigate(['/transaction-list']);
+        // } else if (this.authService.hasRole('USER')) {
+        //   this.router.navigate(['/user-profile']);
+        // }
         this.successMessage = 'Login successful!';
         this.errorMessage = null;
-        // this.router.navigate(['/user-profile']); 
+        this.router.navigate(['/user-profile']); 
 
         
 

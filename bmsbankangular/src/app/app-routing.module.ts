@@ -53,9 +53,9 @@ const routes: Routes = [
   {
     path: '', redirectTo: 'login', pathMatch: 'full'
   },
-  {
-    path: 'logout', component: LogoutComponent
-  },
+  // {
+  //   path: 'logout', component: LogoutComponent
+  // },
   {
     path: 'home', component: HomeComponent
   }

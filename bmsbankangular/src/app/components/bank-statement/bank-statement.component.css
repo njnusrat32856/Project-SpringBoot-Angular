@@ -1,6 +1,6 @@
 .bank-statement-container {
     width: 80%;
-    margin: 0 auto;
+    margin: 20px auto;
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
@@ -38,17 +38,54 @@ tbody tr:hover {
     background-color: #e9e9e9;
 }
 
-td.DEPOSIT {
+.DEPOSIT {
     color: green;
     font-weight: bold;
 }
 
-td.WITHDRAW {
+.WITHDRAW {
     color: red;
     font-weight: bold;
 }
 
-td.FUND_TRANSFER {
+.FUND_TRANSFER {
     color: orange;
     font-weight: bold;
 }
+
+.print-btn {
+    margin: 10px 0;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .print-btn:hover {
+    background-color: #45a049;
+  }
+
+  @media print {
+    /* Hide everything except the print section */
+    body * {
+      visibility: hidden;
+    }
+  
+    #print-section, #print-section * {
+      visibility: visible;
+    }
+  
+    #print-section {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  
+    .print-btn {
+      display: none; /* Hide the print button when printing */
+    }
+  }
+  
+  

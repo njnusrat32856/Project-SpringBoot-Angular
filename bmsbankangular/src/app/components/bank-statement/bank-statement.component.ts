@@ -33,6 +33,18 @@ export class BankStatementComponent implements OnInit {
     // }
   }
 
+  printStatement() {
+    const printContents = document.getElementById('print-section')?.innerHTML;
+    const originalContents = document.body.innerHTML;
+  
+    if (printContents) {
+      document.body.innerHTML = printContents;
+      window.print();
+      document.body.innerHTML = originalContents;
+    }
+  }
+  
+
   loadUserTransactions(): void {
     const user = this.userService.getUser(); 
     if (user) {

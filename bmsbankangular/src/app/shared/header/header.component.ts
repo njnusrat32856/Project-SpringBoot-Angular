@@ -15,38 +15,43 @@ import { Router } from '@angular/router';
 // }
 export class HeaderComponent implements OnInit{
 
-  // isAdmin = false;
-  
-  // isUser = false;
+  isAdmin = false;
+  isUser = false;
 
-  // userRole: string | null = null;
-
-
-  // constructor( public authService: UserService,
-  //   private router:Router,
-  //   @Inject(PLATFORM_ID) private platformId: Object
-  // ) {}
+  userRole: string | null = null;
 
 
-  // ngOnInit(): void {
-  //   this.authService.userRole$.subscribe(role => {
-  //     this.isAdmin = role === 'ADMIN';
-  //     this.isUser = this.authService.isUser();
-  //     // this.isUser = role === 'USER';
-  //   });
-  // }
+  constructor( public authService: UserService,
+    private router:Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
-  userRole: string | null = '';
-  currentUser: User | null = null;
-
-  constructor(protected authService: UserService) {
+  logout(): void {
+    this.authService.logout(); // Call the logout method from AuthService
+    this.router.navigate(['/login']);
   }
+
 
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe(role => {
-      this.currentUser = role;
-      // this.userRole = user?.role || null;
+    this.authService.userRole$.subscribe(role => {
+      this.isAdmin = role === 'ADMIN';
+      // this.isUser = this.authService.isUser();
+      this.isUser = role === 'USER';
     });
   }
+
+  // userRole: string | null = '';
+  // currentUser: User | null = null;
+
+  // constructor(protected authService: UserService) {
+  // }
+  
+
+  // ngOnInit(): void {
+  //   this.authService.currentUser$.subscribe(role => {
+  //     this.currentUser = role;
+  //     // this.userRole = user?.role || null;
+  //   });
+  // }
 
 }

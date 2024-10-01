@@ -1,16 +1,16 @@
 import { UserService } from "../services/user.service";
 
-export class Some{
+export class Some {
 
-    constructor(private authService: UserService) { }
+  constructor(private authService: UserService) { }
 
-    get isAdmin(): boolean {
-        return this.authService.isAdmin();
-      }
-    
-      get isUser(): boolean {
-        return this.authService.isUser();
-      }
-    
-      
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
+  get isUser(): boolean {
+    return this.authService.isUser();
+  }
+
+
 }

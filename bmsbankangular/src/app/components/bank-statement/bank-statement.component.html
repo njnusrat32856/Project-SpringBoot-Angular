@@ -1,5 +1,8 @@
-<div class="bank-statement-container">
+<div class="bank-statement-container" id="print-section">
     <h2 style="text-align: center;">Bank Statement</h2>
+
+    
+
     <table>
       <thead>
         <tr>
@@ -23,5 +26,8 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- Print Button -->
+    <button (click)="printStatement()" class="print-btn">Print Statement</button>
   </div>
   

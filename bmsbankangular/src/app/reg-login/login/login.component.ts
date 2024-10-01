@@ -43,7 +43,7 @@ export class LoginComponent {
         // }
         this.successMessage = 'Login successful!';
         this.errorMessage = null;
-        this.router.navigate(['/user-profile']); 
+        this.router.navigate(['/home']); 
 
         
 

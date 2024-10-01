@@ -15,6 +15,7 @@ import { LoanPaymentComponent } from './components/loan-payment/loan-payment.com
 import { BankStatementComponent } from './components/bank-statement/bank-statement.component';
 import { AdminRegisterComponent } from './reg-login/admin-register/admin-register.component';
 import { UserRoleGuard } from './guard/user-role.guard';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,9 @@ const routes: Routes = [
   },
   {
     path: 'logout', component: LogoutComponent
+  },
+  {
+    path: 'home', component: HomeComponent
   }
 ];
 

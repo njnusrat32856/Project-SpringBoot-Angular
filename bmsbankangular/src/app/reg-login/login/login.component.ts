@@ -41,18 +41,18 @@ export class LoginComponent {
         // } else if (this.authService.hasRole('USER')) {
         //   this.router.navigate(['/user-profile']);
         // }
-        this.successMessage = 'Login successful!';
-        this.errorMessage = null;
-        this.router.navigate(['/home']); 
+        // this.successMessage = 'Login successful!';
+        // this.errorMessage = null;
+        // this.router.navigate(['/home']); 
 
         
 
         // Check user role and navigate accordingly
-        // if (this.authService.isAdmin()) {
-        //   this.router.navigate(['/transaction-list']);
-        // } else if (this.authService.isUser()) {
-        //   this.router.navigate(['/user-profile']);
-        // }
+        if (this.authService.isAdmin()) {
+          this.router.navigate(['/home']);
+        } else if (this.authService.isUser()) {
+          this.router.navigate(['/user-profile']);
+        }
       },
       error: (err) => {
         this.errorMessage = 'Login failed. Please check your credentials.';

@@ -6,6 +6,7 @@ Welcome to the Bank Management System repository built using **Spring Boot** for
 - [Overview](#overview)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
+- [Screenshots](#screenshots)
 - [Installation](#installation)
 - [Role-based Access](#role-based-access)
 
@@ -41,6 +42,44 @@ The application is divided into two main parts:
 - **TypeScript**: Scripting language for writing Angular components.
 - **HTML/CSS**: For structuring and styling the application.
 - **Bootstrap**: For responsive design and UI components.
+
+## Screenshots
+
+📌 Login Page
+![login page](https://github.com/user-attachments/assets/ed42ab1e-56d9-4fae-a46a-4e67ee007e4a)
+
+📌 New Account Open
+![new account open](https://github.com/user-attachments/assets/7b69a4c6-d923-484c-89f3-bde2d431b417)
+
+📌 User Profile
+![user profile](https://github.com/user-attachments/assets/c515420a-1c69-43a8-bc62-77c02e07dedf)
+
+📌 Deposit
+![deposit](https://github.com/user-attachments/assets/6ea3347e-c522-4d3a-9941-c37e90df96f2)
+
+📌 Withdraw
+![withdraw](https://github.com/user-attachments/assets/42f09759-1d97-4ad5-a55c-812adaed9878)
+
+📌 Transfer Fund
+![fund transfer](https://github.com/user-attachments/assets/ed9d5c22-7ba4-458d-a7d2-f5c9594e97ab)
+
+📌 Bank Statement
+![statement](https://github.com/user-attachments/assets/c043cc9a-b57f-472e-ae1c-1ee29ca6caed)
+
+📌 Loan Application
+![loan apply](https://github.com/user-attachments/assets/26a1cb4f-4988-46f0-bf65-a83979df6e86)
+
+📌 Loan Details
+![loan list](https://github.com/user-attachments/assets/cf36d67a-1b42-4c3d-90b1-19c209691dba)
+
+📌 Loan Payment
+![loan payment](https://github.com/user-attachments/assets/3380f7fd-3e66-4310-af51-51736ef31bc8)
+
+📌 Admin approval
+![admin transaction approval](https://github.com/user-attachments/assets/ad7ce935-3b5d-4024-9242-286a3f13002d)
+
+📌 Home Page
+![home page](https://github.com/user-attachments/assets/66aef4e1-ea28-429c-b8ad-eb77e613d0c2)
 
 ## Installation
 
